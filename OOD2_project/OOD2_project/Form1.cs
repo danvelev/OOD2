@@ -144,10 +144,10 @@ namespace OOD2_project
         {
             if (selectedImage != null)
             {
-                Point p = workPanel.PointToClient(new Point(e.X, e.Y));
-                this.network.component = new Component(selectedImage, (this.workPanel.Width - (this.workPanel.Width - selectedImage.Width)), p, Convert.ToInt32(this.tbCurrentFlow.Text));
-                network.component.point = p;
-                this.network.listComponents.Add(this.network.component);
+                point = workPanel.PointToClient(new Point(e.X, e.Y));
+                //this.network.component = new Component(selectedImage, (this.workPanel.Width - (this.workPanel.Width - selectedImage.Width)), p, Convert.ToInt32(this.tbCurrentFlow.Text));
+                //network.component.point = p;
+                //this.network.listComponents.Add(this.network.component);
                 this.workPanel.Invalidate();
             }
         }
