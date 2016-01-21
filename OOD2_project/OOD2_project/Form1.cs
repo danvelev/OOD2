@@ -20,6 +20,8 @@ namespace OOD2_project
         public Network network;
         public ContextMenu cm = new ContextMenu();
         private Point point;
+        private Component startComponent;
+        private Component endComponent;
 
         public Form1()
         {
@@ -59,7 +61,7 @@ namespace OOD2_project
                         this.network.listComponents.Add(new Sink(selectedImage, (this.workPanel.Width - (this.workPanel.Width - selectedImage.Width)), point, Convert.ToInt32(tbCurrentFlow.Text)));
                         break;
                     case "pipe":
-                        this.network.listConnections.Add(new Connection());
+                        this.network.listConnections.Add(new Connection(startComponent, endComponent, Convert.ToInt32(tbCurrentFlow.Text),Convert.ToInt32(tbMaxFlow)));
                         break;
                 }
                 for (int i = 0; i < network.listComponents.Count; i++)

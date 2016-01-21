@@ -32,7 +32,7 @@ namespace OOD2_project
 
         public Point getPosition()
         {
-            return Point;
+            return point;
             // get the position of the component
         }
 

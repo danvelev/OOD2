@@ -13,14 +13,15 @@ namespace OOD2_project
         public Component endComponent;
         public Color color;
         private int flow;
+        private int maxFlow;
         private List<Point> listPoints;
 
-        public Connection(Component StartComp, Component EndComp, Color Color)
+        public Connection(Component StartComp, Component EndComp, int currentFlow, int MaxFlow)
         {
             this.startComponent = StartComp;
             this.endComponent = EndComp;
-            this.color = Color;
-            this.flow = 0;
+            this.flow = currentFlow;
+            this.maxFlow = MaxFlow;
             this.listPoints = new List<Point>();
         }
 
@@ -32,6 +33,25 @@ namespace OOD2_project
         public string setFlow()
         {
             return "Flow is: " + flow;
+        }
+
+        /// <summary>
+        /// Returns TRUE if current flow is over the maximum flow..
+        /// </summary>
+        public bool IsCriticalSection()
+        {
+            if (flow > maxFlow)
+            {
+                return true;
+            }
+            else
+                return false;
+        }
+
+        //need to be finished..
+        public void DrawConnection(Graphics gr)
+        {
+
         }
     }
 }
