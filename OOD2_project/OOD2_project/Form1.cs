@@ -59,7 +59,7 @@ namespace OOD2_project
                         this.network.listComponents.Add(new Sink(selectedImage, (this.workPanel.Width - (this.workPanel.Width - selectedImage.Width)), point, Convert.ToInt32(tbCurrentFlow.Text)));
                         break;
                     case "pipe":
-                        this.network.listConnections.Add(new Connection();
+                        this.network.listConnections.Add(new Connection());
                         break;
                 }
                 for (int i = 0; i < network.listComponents.Count; i++)
@@ -143,7 +143,7 @@ namespace OOD2_project
             if (selectedImage != null)
             {
                 Point p = workPanel.PointToClient(new Point(e.X, e.Y));
-                this.network.component = new Component(selectedImage, (this.workPanel.Width - (this.workPanel.Width - selectedImage.Width)), p);
+                this.network.component = new Component(selectedImage, (this.workPanel.Width - (this.workPanel.Width - selectedImage.Width)), p, Convert.ToInt32(this.tbCurrentFlow.Text));
                 network.component.point = p;
                 this.network.listComponents.Add(this.network.component);
                 this.workPanel.Invalidate();
