@@ -57,6 +57,19 @@ namespace OOD2_project
         /// </summary>
         public List<Connection> getConnections() { return connections; }
 
+        public virtual void DrawComponent(Graphics gr, Point position)
+        {
+            try
+            {
+                Rectangle rect = new Rectangle(position.X - 1, position.Y - 1, size, size);
+                gr.DrawImage(image, rect);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
     }
 
 }
