@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.workPanel = new System.Windows.Forms.Panel();
+            this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.toolBox = new System.Windows.Forms.Panel();
             this.pbPump = new System.Windows.Forms.PictureBox();
             this.pbSink = new System.Windows.Forms.PictureBox();
@@ -48,8 +49,9 @@
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.trackBar1 = new System.Windows.Forms.TrackBar();
+            this.btSet = new System.Windows.Forms.Button();
             this.workPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.toolBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbPump)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbSink)).BeginInit();
@@ -58,12 +60,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbMerger)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPipe)).BeginInit();
             this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
             // 
             // workPanel
             // 
             this.workPanel.BackColor = System.Drawing.Color.White;
+            this.workPanel.Controls.Add(this.btSet);
             this.workPanel.Controls.Add(this.trackBar1);
             this.workPanel.Location = new System.Drawing.Point(164, 29);
             this.workPanel.Name = "workPanel";
@@ -74,6 +76,19 @@
             this.workPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.workPanel_Paint);
             this.workPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.workPanel_MouseClick);
             this.workPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.workPanel_MouseDown);
+            // 
+            // trackBar1
+            // 
+            this.trackBar1.Location = new System.Drawing.Point(32, 331);
+            this.trackBar1.Maximum = 100;
+            this.trackBar1.Name = "trackBar1";
+            this.trackBar1.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.trackBar1.Size = new System.Drawing.Size(45, 104);
+            this.trackBar1.SmallChange = 10;
+            this.trackBar1.TabIndex = 0;
+            this.trackBar1.TickFrequency = 10;
+            this.trackBar1.Value = 50;
+            this.trackBar1.Visible = false;
             // 
             // toolBox
             // 
@@ -251,18 +266,15 @@
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Help";
             // 
-            // trackBar1
+            // btSet
             // 
-            this.trackBar1.Location = new System.Drawing.Point(32, 331);
-            this.trackBar1.Maximum = 100;
-            this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.trackBar1.Size = new System.Drawing.Size(45, 104);
-            this.trackBar1.SmallChange = 10;
-            this.trackBar1.TabIndex = 0;
-            this.trackBar1.TickFrequency = 10;
-            this.trackBar1.Value = 50;
-            this.trackBar1.Visible = false;
+            this.btSet.Location = new System.Drawing.Point(3, 438);
+            this.btSet.Name = "btSet";
+            this.btSet.Size = new System.Drawing.Size(93, 23);
+            this.btSet.TabIndex = 1;
+            this.btSet.Text = "Set Percentage";
+            this.btSet.UseVisualStyleBackColor = true;
+            this.btSet.Visible = false;
             // 
             // Form1
             // 
@@ -278,6 +290,7 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.workPanel.ResumeLayout(false);
             this.workPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.toolBox.ResumeLayout(false);
             this.toolBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbPump)).EndInit();
@@ -288,7 +301,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbPipe)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -317,6 +329,7 @@
         private System.Windows.Forms.PictureBox pbMerger;
         private System.Windows.Forms.PictureBox pbPipe;
         private System.Windows.Forms.TrackBar trackBar1;
+        private System.Windows.Forms.Button btSet;
     }
 }
 

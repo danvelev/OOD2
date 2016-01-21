@@ -49,6 +49,8 @@ namespace OOD2_project
                         this.network.listComponents.Add(new Pump(selectedImage, (this.workPanel.Width - (this.workPanel.Width - selectedImage.Width)), point, Convert.ToInt32(tbCurrentFlow.Text)));
                         break;
                     case "adjSpliter":
+                        trackBar1.Visible = true;
+                        btSet.Visible = true;
                         this.network.listComponents.Add(new Adjustable_Spliter(selectedImage, (this.workPanel.Width - (this.workPanel.Width - selectedImage.Width)), point, Convert.ToInt32(tbCurrentFlow.Text), 30, 70));
                         break;
                     case "spliter":
@@ -177,6 +179,7 @@ namespace OOD2_project
             pbAdjustableSpliter.BorderStyle = BorderStyle.None;
             point = new Point(e.X, e.Y);
             trackBar1.Visible = true;
+            
         }
 
         private void pbSpliter_MouseUp(object sender, MouseEventArgs e)
