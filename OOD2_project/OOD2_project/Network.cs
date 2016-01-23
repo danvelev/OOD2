@@ -55,13 +55,36 @@ namespace OOD2_project
 
         public bool checkOverlap(Point p)
         {
+            Rectangle r2 = new Rectangle(p, new Size(1, 1));
             foreach (Component comp in listComponents)
             {
-                if (comp.GetPosition() == p)
+                if (comp.rect.IntersectsWith(r2))
                 {
-
+                    return true;
+                    
                 }
             }
+            return false;
+        }
+
+        public Component getComponent(Component comp)
+        {
+            foreach (Component c in listComponents)
+            {
+                if (c == comp)
+                    return c;
+            }
+            return null;
+        }
+
+        public Connection getConnection(Connection conn)
+        {
+            foreach (Connection c in listConnections)
+            {
+                if (c == conn)
+                    return c;
+            }
+            return null;
         }
 
     }
