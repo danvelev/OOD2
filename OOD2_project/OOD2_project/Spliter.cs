@@ -47,6 +47,11 @@ namespace OOD2_project
             this.LowOutput = con;
         }
 
+        public override Point getPosition()
+        {
+            return base.getPosition();
+        }
+
 
     }
     

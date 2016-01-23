@@ -41,9 +41,9 @@ namespace OOD2_project
         /// return the position of the component
         /// </summary>
         /// <returns></returns>
-        public Point getPosition()
+        public override Point getPosition()
         {
-            return base.point;
+            return base.getPosition();
         }
 
         /// <summary>

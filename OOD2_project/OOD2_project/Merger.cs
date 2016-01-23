@@ -30,9 +30,9 @@ namespace OOD2_project
             // draw the certain component on the work panel
         }
 
-        public Point getPosition()
+        public override Point getPosition()
         {
-            return point;
+            return base.getPosition();
             // get the position of the component
         }
 

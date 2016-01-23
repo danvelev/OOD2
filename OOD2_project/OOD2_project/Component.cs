@@ -50,7 +50,7 @@ namespace OOD2_project
         /// Returns the position of the component. It will be implemented in the sub classes
         /// </summary>
         /// <param name="p"></param>
-        public Point GetPosition() { return point; }
+        public virtual Point getPosition() { return point; }
 
         /// <summary>
         /// Returns a list of connections..

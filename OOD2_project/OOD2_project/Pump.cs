@@ -41,9 +41,9 @@ namespace OOD2_project
             return output;
         }
 
-        public Point getPosition()
+        public override Point getPosition()
         {
-            return base.point;
+            return base.getPosition();
         }
 
         public void setOutput(Connection con)
