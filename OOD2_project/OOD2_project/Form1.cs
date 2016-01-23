@@ -40,23 +40,23 @@ namespace OOD2_project
 
         private void workPanel_MouseDown(object sender, MouseEventArgs e)
         {
-            Point p = new Point(e.X, e.Y);      //workPanel.PointToClient(new Point(e.X, e.Y));
-            //foreach (var compt in this.network.listComponents)
+            //Point p = new Point(e.X, e.Y);      //workPanel.PointToClient(new Point(e.X, e.Y));
+            ////foreach (var compt in this.network.listComponents)
+            ////{
+            ////    if (compt.point == p)
+            ////    {
+            ////        cm.Show(this.workPanel, );
+            ////    }
+            ////}
+
+            //// dasdas
+            //if (pipeActivate)
             //{
-            //    if (compt.point == p)
+            //    if (startComponent == null || endComponent == null)
             //    {
-            //        cm.Show(this.workPanel, );
+            //        this.addConnectionPoints(p);
             //    }
             //}
-
-            // dasdas
-            if (pipeActivate)
-            {
-                if (startComponent == null || endComponent == null)
-                {
-                    this.addConnectionPoints(p);
-                }
-            }
         }
 
         //Drawing the component on the workPanel..
@@ -266,6 +266,10 @@ namespace OOD2_project
           
         }
 
+        /// <summary>
+        /// Collects and assigns points to the connections
+        /// </summary>
+        /// <param name="p"></param>
         private void addConnectionPoints(Point p)
         {
             if (this.network.getComponent(p) != null)
