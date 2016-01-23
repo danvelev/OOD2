@@ -14,15 +14,15 @@ namespace OOD2_project
         public Color color;
         private int flow;
         private int maxFlow;
-        private List<Point> listPoints;
+        private Point[] curvePoints;
 
-        public Connection(Component StartComp, Component EndComp, int currentFlow, int MaxFlow)
+        public Connection(Component StartComp, Component EndComp, int currentFlow, int MaxFlow, Point[] points)
         {
             this.startComponent = StartComp;
             this.endComponent = EndComp;
             this.flow = currentFlow;
             this.maxFlow = MaxFlow;
-            this.listPoints = new List<Point>();
+            this.curvePoints = points;
         }
 
 
@@ -51,7 +51,7 @@ namespace OOD2_project
         //need to be finished..
         public void DrawConnection(Graphics gr)
         {
-
+            gr.DrawCurve(new Pen(Brushes.Black), curvePoints);
         }
     }
 }

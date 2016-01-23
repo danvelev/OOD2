@@ -53,6 +53,17 @@ namespace OOD2_project
             }
         }
 
+        public bool checkOverlap(Point p)
+        {
+            foreach (Component comp in listComponents)
+            {
+                if (comp.GetPosition() == p)
+                {
+
+                }
+            }
+        }
+
     }
     
     
