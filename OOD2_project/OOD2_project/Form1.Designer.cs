@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.workPanel = new System.Windows.Forms.Panel();
             this.btSet = new System.Windows.Forms.Button();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
@@ -122,7 +123,7 @@
             // pbPump
             // 
             this.pbPump.ErrorImage = null;
-            this.pbPump.Image = global::OOD2_project.Properties.Resources.pump;
+            this.pbPump.Image = ((System.Drawing.Image)(resources.GetObject("pbPump.Image")));
             this.pbPump.Location = new System.Drawing.Point(39, 17);
             this.pbPump.Name = "pbPump";
             this.pbPump.Size = new System.Drawing.Size(55, 38);
@@ -133,7 +134,7 @@
             // 
             // pbSink
             // 
-            this.pbSink.Image = global::OOD2_project.Properties.Resources.sink;
+            this.pbSink.Image = ((System.Drawing.Image)(resources.GetObject("pbSink.Image")));
             this.pbSink.Location = new System.Drawing.Point(39, 83);
             this.pbSink.Name = "pbSink";
             this.pbSink.Size = new System.Drawing.Size(58, 43);
@@ -144,7 +145,7 @@
             // 
             // pbAdjustableSpliter
             // 
-            this.pbAdjustableSpliter.Image = global::OOD2_project.Properties.Resources.adjustable_spliter;
+            this.pbAdjustableSpliter.Image = ((System.Drawing.Image)(resources.GetObject("pbAdjustableSpliter.Image")));
             this.pbAdjustableSpliter.Location = new System.Drawing.Point(39, 150);
             this.pbAdjustableSpliter.Name = "pbAdjustableSpliter";
             this.pbAdjustableSpliter.Size = new System.Drawing.Size(55, 41);
@@ -155,7 +156,7 @@
             // 
             // pbSpliter
             // 
-            this.pbSpliter.Image = global::OOD2_project.Properties.Resources.spliter;
+            this.pbSpliter.Image = ((System.Drawing.Image)(resources.GetObject("pbSpliter.Image")));
             this.pbSpliter.Location = new System.Drawing.Point(39, 216);
             this.pbSpliter.Name = "pbSpliter";
             this.pbSpliter.Size = new System.Drawing.Size(58, 39);
@@ -166,7 +167,7 @@
             // 
             // pbMerger
             // 
-            this.pbMerger.Image = global::OOD2_project.Properties.Resources.merger;
+            this.pbMerger.Image = ((System.Drawing.Image)(resources.GetObject("pbMerger.Image")));
             this.pbMerger.Location = new System.Drawing.Point(39, 278);
             this.pbMerger.Name = "pbMerger";
             this.pbMerger.Size = new System.Drawing.Size(55, 40);
@@ -177,12 +178,13 @@
             // 
             // pbPipe
             // 
-            this.pbPipe.Image = global::OOD2_project.Properties.Resources.pipe;
+            this.pbPipe.Image = ((System.Drawing.Image)(resources.GetObject("pbPipe.Image")));
             this.pbPipe.Location = new System.Drawing.Point(39, 340);
             this.pbPipe.Name = "pbPipe";
             this.pbPipe.Size = new System.Drawing.Size(55, 42);
             this.pbPipe.TabIndex = 5;
             this.pbPipe.TabStop = false;
+            this.pbPipe.Click += new System.EventHandler(this.pbPipe_Click);
             this.pbPipe.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pbPipe_MouseClick);
             this.pbPipe.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pbPipe_MouseDown);
             this.pbPipe.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pbPipe_MouseUp);

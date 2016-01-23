@@ -12,6 +12,7 @@ namespace OOD2_project
     {
         private Connection input;
         private bool isEmpty;
+        Rectangle rect;
 
         public Sink(Image image, int size, Point coordinates) 
             : base(image, size, coordinates) 
@@ -24,11 +25,11 @@ namespace OOD2_project
 
         }
 
-        public override void DrawComponent(Graphics gr, Point position)
+        public override void DrawComponent(Graphics gr)
         {
             try
             {
-                Rectangle rect = new Rectangle(position.X - 1, position.Y - 1, base.size, base.size);
+                rect = new Rectangle(point.X - 1, point.Y - 1, base.size, base.size);
                 gr.DrawImage(base.image, rect);
             }
             catch (Exception ex)

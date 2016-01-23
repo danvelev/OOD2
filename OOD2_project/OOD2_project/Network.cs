@@ -69,10 +69,10 @@ namespace OOD2_project
 
         public Component getComponent(Point p)
         {
-            Rectangle r2 = new Rectangle(p, new Size(1, 1));
+            Rectangle r2 = new Rectangle(p, new Size(5, 5));
             foreach (Component comp in listComponents)
             {
-                if (comp.rect.IntersectsWith(r2))
+                if (r2.IntersectsWith(comp.rect))
                 {
                     return comp;
 

@@ -13,7 +13,7 @@ namespace OOD2_project
 {
     public partial class Form1 : Form
     {
-        List<Point> p;
+        List<Point> pointsList;
         private Image selectedImage;
         private string selectedComponent;
         private bool isSelected = false; //To show that there is a selected component..
@@ -25,13 +25,14 @@ namespace OOD2_project
         private int upPercentage;
         private int lowPercentage;
         private Adjustable_Spliter adjSpliter;
+        Connection con;
         private Point[] points;
         private bool pipeActivate;
 
         public Form1()
         {
             InitializeComponent();
-            p = new List<Point>();
+            pointsList = new List<Point>();
             this.network = new Network(workPanel.Height, workPanel.Width);
             cm.MenuItems.Add("Remove");
             cm.MenuItems.Add("Edit");
@@ -39,15 +40,32 @@ namespace OOD2_project
 
         private void workPanel_MouseDown(object sender, MouseEventArgs e)
         {
-            
+            Point p = new Point(e.X, e.Y);      //workPanel.PointToClient(new Point(e.X, e.Y));
+            //foreach (var compt in this.network.listComponents)
+            //{
+            //    if (compt.point == p)
+            //    {
+            //        cm.Show(this.workPanel, );
+            //    }
+            //}
+
+            // dasdas
+            if (pipeActivate)
+            {
+                if (startComponent == null || endComponent == null)
+                {
+                    this.addConnectionPoints(p);
+                }
+            }
         }
 
         //Drawing the component on the workPanel..
         private void workPanel_Paint(object sender, PaintEventArgs e)
         {
+            Graphics gr = e.Graphics;
             if (isSelected)
             {
-                Graphics gr = e.Graphics;
+                
                 switch (selectedComponent)
                 {
                     case "pump":   // CUrrent flow added...
@@ -76,13 +94,22 @@ namespace OOD2_project
                         this.network.listComponents.Add(new Sink(selectedImage, (this.workPanel.Width - (this.workPanel.Width - selectedImage.Width)), point));
                         break;
                     case "pipe":
-                        this.network.listConnections.Add(new Connection(startComponent, endComponent, Convert.ToInt32(tbCurrentFlow.Text),Convert.ToInt32(tbMaxFlow),points));
+                        //this.network.listConnections.Add(new Connection(startComponent, endComponent, Convert.ToInt32(tbCurrentFlow.Text),Convert.ToInt32(tbMaxFlow),points));
                         break;
                 }
-                for (int i = 0; i < network.listComponents.Count; i++)
+                foreach(Component com in this.network.listComponents)
                 {
-                    this.network.drawComponent(gr, network.listComponents[i].point, network.listComponents[i]);
+                    // foreach loop to draw
+                    if(com is Pump)
+                        com.DrawComponent(gr);
+                    else
+                        com.DrawComponent(gr);
                 }
+            }
+            if (pipeActivate && endComponent != null)
+            {
+                con.DrawConnection(gr);
+                pipeActivate = false;
             }
             this.network.panelHeight = Convert.ToInt32(this.workPanel.Size.Height);
             this.network.panelWidth = Convert.ToInt32(this.workPanel.Size.Width);
@@ -141,12 +168,14 @@ namespace OOD2_project
 
         private void pbPipe_MouseDown(object sender, MouseEventArgs e)
         {
+            //isSelected = false;
             Cursor.Current = Cursors.Cross;
             pbPump.BorderStyle = BorderStyle.FixedSingle;
             selectedImage = pbPipe.Image;
             selectedComponent = "pipe";
             pbPump.DoDragDrop(selectedImage, DragDropEffects.Copy);
-            isSelected = true;
+            //isSelected = true;
+            pipeActivate = true;
         }
 
         private void workPanel_DragEnter(object sender, DragEventArgs e)
@@ -217,7 +246,7 @@ namespace OOD2_project
 
         private void workPanel_MouseClick(object sender, MouseEventArgs e)
         {
-            //Point p = workPanel.PointToClient(new Point(e.X, e.Y));
+            Point p = new Point(e.X, e.Y); //workPanel.PointToClient(new Point(e.X, e.Y));
             //foreach (var compt in this.network.listComponents)
             //{
             //    if (compt.point == p)
@@ -229,23 +258,41 @@ namespace OOD2_project
             // dasdas
             if (pipeActivate)
             {
-                while (startComponent == null && endComponent == null)
+                if (startComponent == null || endComponent == null)
                 {
-                    if (this.network.getComponent(new Point(e.X, e.Y)) != null)
-                    {
-                        if (startComponent == null)
-                        {
-                            startComponent = this.network.getComponent(new Point(e.X, e.Y));
-                        }
-                        else if (endComponent == null)
-                        {
-                            endComponent = this.network.getComponent(new Point(e.X, e.Y));
-                        }
-
-                    }
+                    this.addConnectionPoints(p);
                 }
             }
           
+        }
+
+        private void addConnectionPoints(Point p)
+        {
+            if (this.network.getComponent(p) != null)
+            {
+                if (startComponent == null)
+                {
+                    startComponent = this.network.getComponent(p);
+                    pointsList.Add(p);
+                }
+                else if (endComponent == null)
+                {
+                    endComponent = this.network.getComponent(p);
+                    pointsList.Add(p);
+                    points = pointsList.ToArray();
+                    con = new Connection(startComponent, endComponent, Convert.ToInt32(tbCurrentFlow.Text), Convert.ToInt32(tbMaxFlow.Text), points);
+                    this.network.listConnections.Add(con);
+                    this.workPanel.Invalidate();
+                }
+
+            }
+            else if (startComponent == null)
+            {
+                MessageBox.Show("You must select a starting component first");
+            }
+            else if (endComponent == null)
+                pointsList.Add(p);
+
         }
 
         private void btSet_Click(object sender, EventArgs e)
@@ -257,6 +304,11 @@ namespace OOD2_project
         }
 
         private void pbPipe_MouseClick(object sender, MouseEventArgs e)
+        {
+            pipeActivate = true;
+        }
+
+        private void pbPipe_Click(object sender, EventArgs e)
         {
             pipeActivate = true;
         }

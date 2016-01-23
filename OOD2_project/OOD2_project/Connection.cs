@@ -51,7 +51,7 @@ namespace OOD2_project
         //need to be finished..
         public void DrawConnection(Graphics gr)
         {
-            gr.DrawCurve(new Pen(Brushes.Black), curvePoints);
+            gr.DrawLines(new Pen(Brushes.Black), curvePoints);
         }
     }
 }

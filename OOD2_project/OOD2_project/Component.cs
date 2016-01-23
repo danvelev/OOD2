@@ -26,6 +26,7 @@ namespace OOD2_project
             this.image = Image;
             this.size = Size;
             this.connections = new List<Connection>();
+            rect = new Rectangle(point.X - 1, point.Y - 1, size, size);
             //this.currentFlow = CurrentFlow;
         }
 
@@ -58,11 +59,11 @@ namespace OOD2_project
         /// </summary>
         public List<Connection> getConnections() { return connections; }
 
-        public virtual void DrawComponent(Graphics gr, Point position)
+        public virtual void DrawComponent(Graphics gr)
         {
             try
             {
-                rect = new Rectangle(position.X - 1, position.Y - 1, size, size);
+                
                 gr.DrawImage(image, rect);
             }
             catch (Exception ex)

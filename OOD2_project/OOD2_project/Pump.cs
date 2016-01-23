@@ -12,24 +12,25 @@ namespace OOD2_project
     {
         private int maxFlow;
         private Connection output;
+        Rectangle rect;
 
         public Pump(Image image, int size, Point coordinates, int CurrentFlow)
             : base(image, size, coordinates)
         {
-
+            //rect = new Rectangle(point.X - 1, point.Y - 1, base.size, base.size);
         }
 
         public void Clear()
         {
         }
 
-        public override void DrawComponent(Graphics gr, Point position)
+        public override void DrawComponent(Graphics gr)
         {
             try
             {
-                Rectangle rect = new Rectangle(position.X - 1, position.Y - 1, base.size, base.size);
-                rect.
-                gr.DrawImage(base.image, rect);
+                
+                //rect.
+                gr.DrawImage(base.image, base.rect);
             }
             catch (Exception ex)
             {
