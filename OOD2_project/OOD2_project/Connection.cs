@@ -51,7 +51,13 @@ namespace OOD2_project
         //need to be finished..
         public void DrawConnection(Graphics gr)
         {
-            gr.DrawLines(new Pen(Brushes.Black), curvePoints);
+            if (IsCriticalSection())
+            {
+                gr.DrawLines(new Pen(Brushes.Red, 5), curvePoints);
+            }
+            else
+                gr.DrawLines(new Pen(Brushes.Green, 5), curvePoints);
+
         }
     }
 }
