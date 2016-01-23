@@ -1,13 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
-using System.Drawing;
 using System.Windows.Forms;
+
 
 namespace OOD2_project
 {
+    [Serializable]
     public class Network
     {
         public int maxComponents;
@@ -18,6 +23,7 @@ namespace OOD2_project
        // private int maxFlow;
         public Component component;
         public Connection connection;
+        private string savedFile;
 
         public Network(int height, int width)
         {
@@ -29,10 +35,6 @@ namespace OOD2_project
             this.maxComponents = 20;
         }
 
-        public void drawConnection(Graphics g, Point clickPoint, Connection connection)
-        {
-
-        }
 
         /// <summary>
         /// Draws the component on the woking pannel and saves the drawn component in listComponents..
@@ -89,6 +91,63 @@ namespace OOD2_project
                     return c;
             }
             return null;
+        }
+        /// <summary>
+        /// Method to Open a file with network
+        /// </summary>
+        public bool OpenFile()
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                FileStream fs = null;
+                BinaryFormatter bf = null;
+
+                openFileDialog.Filter = "SimulatorExtension files (*.simex)|*.simex";
+                openFileDialog.FilterIndex = 1;
+                openFileDialog.RestoreDirectory = true;
+
+
+                fs = new FileStream(openFileDialog.FileName, FileMode.Open, FileAccess.Read);
+                bf = new BinaryFormatter();
+                Network loadNetwork = (Network)(bf.Deserialize(fs));
+                this.listComponents = loadNetwork.listComponents;
+                this.listConnections = loadNetwork.listConnections;
+                return true;
+            }
+            else
+                return false;
+        }
+
+        /// <summary>
+        /// save as a design 
+        /// </summary>
+        /// <param name="stream"></param>
+        public bool SaveAs(Network network)
+        {
+            SaveFileDialog dialog = new SaveFileDialog();
+
+            dialog.FileName = "Simulation1";
+            dialog.Filter = "SimulatorExtension files (*.simex)|*.simex";
+            dialog.FilterIndex = 1;
+            dialog.RestoreDirectory = true;
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                FileStream fs = null;
+                BinaryFormatter bf = null;
+
+                fs = new FileStream(dialog.FileName, FileMode.Create, FileAccess.Write);
+                bf = new BinaryFormatter();
+                this.savedFile = dialog.FileName;
+                bf.Serialize(fs, network);
+                fs.Close();
+                return true;
+
+            }
+            return false;
+
         }
 
     }

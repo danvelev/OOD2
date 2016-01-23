@@ -8,6 +8,7 @@ using System.Windows.Forms;
 
 namespace OOD2_project
 {
+    [Serializable]
     public class Adjustable_Spliter : Component
     {
         private int lowPercentage;

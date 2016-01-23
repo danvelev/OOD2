@@ -8,6 +8,7 @@ using System.Windows.Forms;
 
 namespace OOD2_project
 {
+    [Serializable]
     public class Sink : Component
     {
         private Connection input;

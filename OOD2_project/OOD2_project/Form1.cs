@@ -8,6 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Runtime.Serialization;
+using System.Reflection;
 
 namespace OOD2_project
 {
@@ -355,6 +358,89 @@ namespace OOD2_project
         private void pbPipe_Click(object sender, EventArgs e)
         {
             pipeActivate = true;
+        }
+
+        
+      
+
+        private void newToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            if (this.network.listComponents.Count >= 1)
+            {
+                DialogResult dialogResult = MessageBox.Show("Would you like to save your current work?", "Save file ?", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    this.network.SaveAs(this.network);
+                    this.network.listComponents.Clear();
+                    this.network.listConnections.Clear();
+                    this.isSelected = false;
+                    this.workPanel.Invalidate();
+                }
+                else
+                    this.network.listComponents.Clear();
+                this.network.listConnections.Clear();
+                this.isSelected = false;
+                this.workPanel.Invalidate();
+
+            }
+            else
+            {
+                this.network.listComponents.Clear();
+                this.network.listConnections.Clear();
+                this.isSelected = false;
+                this.workPanel.Invalidate();
+
+            }
+        }
+
+        private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (this.network.listComponents.Count >= 1)
+            {
+                DialogResult dialogResult = MessageBox.Show("Would you like to save your current work?", "Save file ?", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    this.network.SaveAs(this.network);
+                    this.network.OpenFile();
+                    //this.isSelected = false;
+                    this.workPanel.Invalidate();
+                }
+                else
+                    this.network.OpenFile();
+                // this.isSelected = false;
+                this.workPanel.Invalidate();
+            }
+            else
+            {
+                this.network.OpenFile();
+                //this.isSelected = false;
+                this.workPanel.Invalidate();
+            }
+
+        }
+
+        private void saveAsToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            this.network.SaveAs(this.network);
+        }
+
+        private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (this.network.listComponents.Count >= 1)
+            {
+                DialogResult dialogResult = MessageBox.Show("Would you like to save your current work?", "Save file ?", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    this.network.SaveAs(this.network);
+                    this.Close();
+                }
+                else
+                    this.Close();
+            }
+            else
+            {
+                this.Close();
+            }
         }
 
     }
