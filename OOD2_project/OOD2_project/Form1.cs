@@ -226,6 +226,7 @@ namespace OOD2_project
             //    }
             //}
 
+            // dasdas
             if (pipeActivate)
             {
                 while (startComponent == null && endComponent == null)
