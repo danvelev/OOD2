@@ -53,7 +53,10 @@ namespace OOD2_project
         /// <param name="con"></param>
         public void setInput(Connection con)
         {
-            input = con;
+            if (isEmpty)
+                input = con;
+            else
+                MessageBox.Show("You cannot have more than one Input in the Sink!");
         }
 
     }

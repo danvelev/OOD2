@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace OOD2_project
 {
@@ -17,6 +18,9 @@ namespace OOD2_project
         private Connection Input;
         private Connection UpOutput;
         private Connection LowOutput;
+        private bool counterIn = false;
+        private bool counterUpOut = false;
+        private bool counterLowOut = false;
 
         public Adjustable_Spliter(Image image, int size, Point coordinates)
             : base(image, size, coordinates)
@@ -34,18 +38,40 @@ namespace OOD2_project
 
         public void setInput(Connection conn, int flow)
         {
-            this.Input = conn;
-            this.currentFlow = flow;
+            if (counterIn)
+                MessageBox.Show("You cannot have more than 1 Input");
+            else
+            {
+                this.Input = conn;
+                this.currentFlow = flow;
+                counterIn = true;
+            }
         }
 
         public void SetUpOutput(Connection conn)
         {
-            this.UpOutput = conn;
+            if (counterUpOut)
+            {
+                this.UpOutput = conn;
+                counterUpOut = true;
+            }
+            else
+            {
+                MessageBox.Show("You can not have more than 2 up Outputs");
+            }
         }
 
         public void SetLowOutput(Connection con)
         {
-            this.LowOutput = con;
+            if (counterLowOut)
+            {
+                this.LowOutput = con;
+                counterLowOut = true;
+            }
+            else
+            {
+                MessageBox.Show("You can not have more than 2 low Outputs");
+            }
         }
 
         public override Point getPosition()

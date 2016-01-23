@@ -11,13 +11,17 @@ namespace OOD2_project
     public class Pump : Component
     {
         private int maxFlow;
+        private int currentFlow;
         private Connection output;
         Rectangle rect;
+        public bool isUsed;
 
         public Pump(Image image, int size, Point coordinates, int CurrentFlow)
             : base(image, size, coordinates)
         {
             //rect = new Rectangle(point.X - 1, point.Y - 1, base.size, base.size);
+            currentFlow = CurrentFlow;
+            isUsed = false;
         }
 
         public void Clear()
@@ -43,6 +47,11 @@ namespace OOD2_project
             return output;
         }
 
+        public int getFlow()
+        {
+            return currentFlow;
+        }
+
         public override Point getPosition()
         {
             return base.getPosition();
@@ -51,6 +60,7 @@ namespace OOD2_project
         public void setOutput(Connection con)
         {
             output = con;
+            isUsed = true;
         }
 
 

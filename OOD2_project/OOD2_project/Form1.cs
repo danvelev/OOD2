@@ -75,23 +75,50 @@ namespace OOD2_project
                         }
                         else
                         {
-                            this.network.listComponents.Add(new Pump(selectedImage, (this.workPanel.Width - (this.workPanel.Width - selectedImage.Width)), point, Convert.ToInt32(tbCurrentFlow.Text)));
+                            if (!this.network.checkOverlap(point))
+                            {
+
+                                this.network.listComponents.Add(new Pump(selectedImage, (this.workPanel.Width - (this.workPanel.Width - selectedImage.Width)), point, Convert.ToInt32(tbCurrentFlow.Text)));
+
+                            }
+                            else
+                                MessageBox.Show("Components cannot overlap!");
                         }
                         break;
                     case "adjSpliter":
                         trackBar1.Visible = true;
                         btSet.Visible = true;
-                        this.adjSpliter = new Adjustable_Spliter(selectedImage, (this.workPanel.Width - (this.workPanel.Width - selectedImage.Width)), point);
-                        this.network.listComponents.Add(adjSpliter);
+                        if (!this.network.checkOverlap(point))
+                        {
+                            this.adjSpliter = new Adjustable_Spliter(selectedImage, (this.workPanel.Width - (this.workPanel.Width - selectedImage.Width)), point);
+                            this.network.listComponents.Add(adjSpliter);
+                        }
+                        else
+                            MessageBox.Show("Components cannot overlap!");
                         break;
                     case "spliter":
-                        this.network.listComponents.Add(new Spliter(selectedImage, (this.workPanel.Width - (this.workPanel.Width - selectedImage.Width)), point ));
+                        if (!this.network.checkOverlap(point))
+                        {
+                            this.network.listComponents.Add(new Spliter(selectedImage, (this.workPanel.Width - (this.workPanel.Width - selectedImage.Width)), point));
+                        }
+                        else
+                            MessageBox.Show("Components cannot overlap!");
                         break;
                     case "merger":
-                        this.network.listComponents.Add(new Merger(selectedImage, (this.workPanel.Width - (this.workPanel.Width - selectedImage.Width)), point));
+                        if (!this.network.checkOverlap(point))
+                        {
+                            this.network.listComponents.Add(new Merger(selectedImage, (this.workPanel.Width - (this.workPanel.Width - selectedImage.Width)), point));
+                        }
+                        else
+                            MessageBox.Show("Components cannot overlap!");
                         break;
                     case "sink":
-                        this.network.listComponents.Add(new Sink(selectedImage, (this.workPanel.Width - (this.workPanel.Width - selectedImage.Width)), point));
+                        if (!this.network.checkOverlap(point))
+                        {
+                            this.network.listComponents.Add(new Sink(selectedImage, (this.workPanel.Width - (this.workPanel.Width - selectedImage.Width)), point));
+                        }
+                        else
+                            MessageBox.Show("Components cannot overlap!");
                         break;
                     case "pipe":
                         //this.network.listConnections.Add(new Connection(startComponent, endComponent, Convert.ToInt32(tbCurrentFlow.Text),Convert.ToInt32(tbMaxFlow),points));
@@ -105,10 +132,17 @@ namespace OOD2_project
                     else
                         com.DrawComponent(gr);
                 }
+                foreach (Connection c in this.network.listConnections)
+                {
+                    c.DrawConnection(gr);
+                }
             }
             if (pipeActivate && endComponent != null)
             {
                 con.DrawConnection(gr);
+                pointsList = new List<Point>();
+                startComponent = null;
+                endComponent = null;
                 pipeActivate = false;
             }
             this.network.panelHeight = Convert.ToInt32(this.workPanel.Size.Height);
@@ -277,7 +311,13 @@ namespace OOD2_project
                 if (startComponent == null)
                 {
                     startComponent = this.network.getComponent(p);
-                    pointsList.Add(p);
+                    if (startComponent is Sink)
+                    {
+                        MessageBox.Show("You cannot start with Sink");
+                        startComponent = null;
+                    }
+                    else
+                        pointsList.Add(p);
                 }
                 else if (endComponent == null)
                 {

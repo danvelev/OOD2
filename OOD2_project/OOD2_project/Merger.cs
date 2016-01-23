@@ -4,13 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace OOD2_project
 {
     public class Merger : Component
     {
-        private int upInput { get; set; }
-        private int lowInput { get; set; }
+        private Connection upInput { get; set; }
+        private Connection lowInput { get; set; }
+        private Connection Output { get; set; }
+        private int lowInflow;
+        private int upInflow;
+        private bool counterLowIn = false;
+        private bool counterUpIn = false;
+        private bool counterOut = false;
 
         public Merger(Image image, int size, Point coordinates)
             : base(image, size, coordinates)
@@ -42,17 +49,32 @@ namespace OOD2_project
             return 0;
         }
 
-        public int setLowInput(Connection c)
+        public void setLowInput(Connection c, int flow)
         {
             //set the the low input
-            return 0;
+            if (!counterLowIn)
+            {
+                lowInput = c;
+                counterLowIn = true;
+            }
+            else
+                MessageBox.Show("You cannot have more than 2 low Inputs in a Merger!");
+
         }
 
-        public int setUpInput(Connection c)
+        public void setUpInput(Connection c)
         {
-            return 0;
+            upInput = c;
+            counterUpIn = true;
             //set the up input of the component
         }
+
+        public void setOutput(Connection c)
+        {
+            Output = c;
+            counterOut = true;
+        }
+
 
 
 
