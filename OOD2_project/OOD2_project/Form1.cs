@@ -24,6 +24,8 @@ namespace OOD2_project
         private Component endComponent;
         private int upPercentage;
         private int lowPercentage;
+        private Adjustable_Spliter adjSpliter;
+        private Point[] points;
 
         public Form1()
         {
@@ -60,7 +62,8 @@ namespace OOD2_project
                     case "adjSpliter":
                         trackBar1.Visible = true;
                         btSet.Visible = true;
-                        this.network.listComponents.Add(new Adjustable_Spliter(selectedImage, (this.workPanel.Width - (this.workPanel.Width - selectedImage.Width)), point, lowPercentage, upPercentage));
+                        this.adjSpliter = new Adjustable_Spliter(selectedImage, (this.workPanel.Width - (this.workPanel.Width - selectedImage.Width)), point);
+                        this.network.listComponents.Add(adjSpliter);
                         break;
                     case "spliter":
                         this.network.listComponents.Add(new Spliter(selectedImage, (this.workPanel.Width - (this.workPanel.Width - selectedImage.Width)), point ));
@@ -72,7 +75,7 @@ namespace OOD2_project
                         this.network.listComponents.Add(new Sink(selectedImage, (this.workPanel.Width - (this.workPanel.Width - selectedImage.Width)), point));
                         break;
                     case "pipe":
-                        this.network.listConnections.Add(new Connection(startComponent, endComponent, Convert.ToInt32(tbCurrentFlow.Text),Convert.ToInt32(tbMaxFlow)));
+                        this.network.listConnections.Add(new Connection(startComponent, endComponent, Convert.ToInt32(tbCurrentFlow.Text),Convert.ToInt32(tbMaxFlow),points));
                         break;
                 }
                 for (int i = 0; i < network.listComponents.Count; i++)
@@ -226,10 +229,10 @@ namespace OOD2_project
 
         private void btSet_Click(object sender, EventArgs e)
         {
-            this.upPercentage = trackBar1.Value - 10;
-            this.lowPercentage = trackBar1.Value;
             trackBar1.Visible = false;
             btSet.Visible = false;
+            adjSpliter.Split(trackBar1.Value);
+             
         }
 
     }

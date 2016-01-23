@@ -28,8 +28,8 @@ namespace OOD2_project
         public void Split(int value)
         {
            // input = base.currentFlow;
-            this.upOutFlow = currentFlow - upPercentage;
-            this.lowOutFlow = currentFlow - lowPercentage;
+            this.upOutFlow = currentFlow * ((value / 100) * currentFlow);
+            this.lowOutFlow = ((value / 100) * currentFlow);
         }
 
         public void setInput(Connection conn, int flow)
