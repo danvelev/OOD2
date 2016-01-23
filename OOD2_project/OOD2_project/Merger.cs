@@ -64,15 +64,25 @@ namespace OOD2_project
 
         public void setUpInput(Connection c)
         {
-            upInput = c;
-            counterUpIn = true;
+            if (!counterUpIn)
+            {
+                upInput = c;
+                counterUpIn = true;
+            }
+            else
+                MessageBox.Show("You cannot have more than 2 low Inputs in a Merger!");
             //set the up input of the component
         }
 
         public void setOutput(Connection c)
         {
-            Output = c;
-            counterOut = true;
+            if (!counterOut)
+            {
+                Output = c;
+                counterOut = true;
+            }
+            else
+                MessageBox.Show("You cannot have more than 2 low Inputs in a Merger!");
         }
 
 

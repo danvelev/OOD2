@@ -51,6 +51,12 @@ namespace OOD2_project
         //need to be finished..
         public void DrawConnection(Graphics gr)
         {
+            switch (startComponent)
+            {
+                case Sink:
+                    gr.DrawLines(new Pen(Brushes.Red, 5), curvePoints);
+                    break;
+            }
             if (IsCriticalSection())
             {
                 gr.DrawLines(new Pen(Brushes.Red, 5), curvePoints);
