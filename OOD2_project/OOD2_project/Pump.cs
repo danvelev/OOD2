@@ -28,6 +28,7 @@ namespace OOD2_project
             try
             {
                 Rectangle rect = new Rectangle(position.X - 1, position.Y - 1, base.size, base.size);
+                rect.
                 gr.DrawImage(base.image, rect);
             }
             catch (Exception ex)

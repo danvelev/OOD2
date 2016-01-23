@@ -26,6 +26,7 @@ namespace OOD2_project
         private int lowPercentage;
         private Adjustable_Spliter adjSpliter;
         private Point[] points;
+        private bool pipeActivate;
 
         public Form1()
         {
@@ -224,6 +225,25 @@ namespace OOD2_project
             //        cm.Show(this.workPanel, );
             //    }
             //}
+
+            if (pipeActivate)
+            {
+                while (startComponent == null && endComponent == null)
+                {
+                    if (this.network.getComponent(new Point(e.X, e.Y)) != null)
+                    {
+                        if (startComponent == null)
+                        {
+                            startComponent = this.network.getComponent(new Point(e.X, e.Y));
+                        }
+                        else if (endComponent == null)
+                        {
+                            endComponent = this.network.getComponent(new Point(e.X, e.Y));
+                        }
+
+                    }
+                }
+            }
           
         }
 
@@ -233,6 +253,11 @@ namespace OOD2_project
             btSet.Visible = false;
             adjSpliter.Split(trackBar1.Value);
              
+        }
+
+        private void pbPipe_MouseClick(object sender, MouseEventArgs e)
+        {
+            pipeActivate = true;
         }
 
     }

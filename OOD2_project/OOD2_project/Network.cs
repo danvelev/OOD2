@@ -67,12 +67,16 @@ namespace OOD2_project
             return false;
         }
 
-        public Component getComponent(Component comp)
+        public Component getComponent(Point p)
         {
-            foreach (Component c in listComponents)
+            Rectangle r2 = new Rectangle(p, new Size(1, 1));
+            foreach (Component comp in listComponents)
             {
-                if (c == comp)
-                    return c;
+                if (comp.rect.IntersectsWith(r2))
+                {
+                    return comp;
+
+                }
             }
             return null;
         }

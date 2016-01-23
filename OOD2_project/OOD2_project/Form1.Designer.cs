@@ -183,6 +183,7 @@
             this.pbPipe.Size = new System.Drawing.Size(55, 42);
             this.pbPipe.TabIndex = 5;
             this.pbPipe.TabStop = false;
+            this.pbPipe.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pbPipe_MouseClick);
             this.pbPipe.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pbPipe_MouseDown);
             this.pbPipe.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pbPipe_MouseUp);
             // 

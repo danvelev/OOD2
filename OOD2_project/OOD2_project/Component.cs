@@ -18,6 +18,7 @@ namespace OOD2_project
         public int currentFlow;
         public int size { get; set; }
         public List<Connection> connections;
+        public Rectangle rect;
 
         public Component(Image Image, int Size, Point coordinates)
         {
@@ -61,7 +62,7 @@ namespace OOD2_project
         {
             try
             {
-                Rectangle rect = new Rectangle(position.X - 1, position.Y - 1, size, size);
+                rect = new Rectangle(position.X - 1, position.Y - 1, size, size);
                 gr.DrawImage(image, rect);
             }
             catch (Exception ex)
