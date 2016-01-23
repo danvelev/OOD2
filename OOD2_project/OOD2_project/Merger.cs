@@ -12,8 +12,8 @@ namespace OOD2_project
         private int upInput { get; set; }
         private int lowInput { get; set; }
 
-        public Merger(Image image, int size, Point coordinates, int CurrentFlow)
-            : base(image, size, coordinates, CurrentFlow)
+        public Merger(Image image, int size, Point coordinates)
+            : base(image, size, coordinates)
         {
             //this.upInput = UpInput;
             //this.lowInput = LowInput;

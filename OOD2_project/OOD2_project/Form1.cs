@@ -22,6 +22,8 @@ namespace OOD2_project
         private Point point;
         private Component startComponent;
         private Component endComponent;
+        private int upPercentage;
+        private int lowPercentage;
 
         public Form1()
         {
@@ -45,22 +47,29 @@ namespace OOD2_project
                 Graphics gr = e.Graphics;
                 switch (selectedComponent)
                 {
-                    case "pump":   // CUrrent flow added !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11111
-                        this.network.listComponents.Add(new Pump(selectedImage, (this.workPanel.Width - (this.workPanel.Width - selectedImage.Width)), point, Convert.ToInt32(tbCurrentFlow.Text)));
+                    case "pump":   // CUrrent flow added...
+                        if (tbCurrentFlow.Text == "" && tbMaxFlow.Text == "")
+                        {
+                            MessageBox.Show("Please enter the current and max flow");
+                        }
+                        else
+                        {
+                            this.network.listComponents.Add(new Pump(selectedImage, (this.workPanel.Width - (this.workPanel.Width - selectedImage.Width)), point, Convert.ToInt32(tbCurrentFlow.Text)));
+                        }
                         break;
                     case "adjSpliter":
                         trackBar1.Visible = true;
                         btSet.Visible = true;
-                        this.network.listComponents.Add(new Adjustable_Spliter(selectedImage, (this.workPanel.Width - (this.workPanel.Width - selectedImage.Width)), point, Convert.ToInt32(tbCurrentFlow.Text), 30, 70));
+                        this.network.listComponents.Add(new Adjustable_Spliter(selectedImage, (this.workPanel.Width - (this.workPanel.Width - selectedImage.Width)), point, lowPercentage, upPercentage));
                         break;
                     case "spliter":
-                        this.network.listComponents.Add(new Spliter(selectedImage, (this.workPanel.Width - (this.workPanel.Width - selectedImage.Width)), point, Convert.ToInt32(tbCurrentFlow.Text)));
+                        this.network.listComponents.Add(new Spliter(selectedImage, (this.workPanel.Width - (this.workPanel.Width - selectedImage.Width)), point ));
                         break;
                     case "merger":
-                        this.network.listComponents.Add(new Merger(selectedImage, (this.workPanel.Width - (this.workPanel.Width - selectedImage.Width)), point, Convert.ToInt32(tbCurrentFlow.Text)));
+                        this.network.listComponents.Add(new Merger(selectedImage, (this.workPanel.Width - (this.workPanel.Width - selectedImage.Width)), point));
                         break;
                     case "sink":
-                        this.network.listComponents.Add(new Sink(selectedImage, (this.workPanel.Width - (this.workPanel.Width - selectedImage.Width)), point, Convert.ToInt32(tbCurrentFlow.Text)));
+                        this.network.listComponents.Add(new Sink(selectedImage, (this.workPanel.Width - (this.workPanel.Width - selectedImage.Width)), point));
                         break;
                     case "pipe":
                         this.network.listConnections.Add(new Connection(startComponent, endComponent, Convert.ToInt32(tbCurrentFlow.Text),Convert.ToInt32(tbMaxFlow)));
@@ -213,6 +222,14 @@ namespace OOD2_project
             //    }
             //}
           
+        }
+
+        private void btSet_Click(object sender, EventArgs e)
+        {
+            this.upPercentage = trackBar1.Value - 10;
+            this.lowPercentage = trackBar1.Value;
+            trackBar1.Visible = false;
+            btSet.Visible = false;
         }
 
     }

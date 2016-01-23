@@ -11,19 +11,17 @@ namespace OOD2_project
     {
         private int upOutFlow;
         private int lowOutFlow;
-        int currentFlow;
+        private int inFlow;
         private Connection Input;
         private Connection UpOutput;
         private Connection LowOutput;
 
 
-        public Spliter(Image image, int size, Point coordinates, int CurrentFlow)
-            : base(image, size, coordinates, CurrentFlow)
+        public Spliter(Image image, int size, Point coordinates)
+            : base(image, size, coordinates)
         {
             this.lowOutFlow = 0;
-            this.upOutFlow = 0;
-            this.currentFlow = CurrentFlow;
-           
+            this.upOutFlow = 0;           
         }
 
         public void Split()

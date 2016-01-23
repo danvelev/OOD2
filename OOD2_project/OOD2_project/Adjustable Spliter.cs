@@ -18,12 +18,12 @@ namespace OOD2_project
         private Connection UpOutput;
         private Connection LowOutput;
 
-        public Adjustable_Spliter(Image image, int size, Point coordinates, int CurrentFlow, int LowPercentage, int UpPercentage)
-            : base(image, size, coordinates, CurrentFlow)
+        public Adjustable_Spliter(Image image, int size, Point coordinates, int LowPercentage, int UpPercentage)
+            : base(image, size, coordinates)
         {
             this.lowPercentage = LowPercentage;
             this.upPercentage = UpPercentage;
-            this.currentFlow = CurrentFlow;
+            //this.currentFlow = CurrentFlow;
         }
 
         public void Spliter()

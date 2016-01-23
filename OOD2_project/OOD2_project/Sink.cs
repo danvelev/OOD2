@@ -13,8 +13,8 @@ namespace OOD2_project
         private Connection input;
         private bool isEmpty;
 
-        public Sink(Image image, int size, Point coordinates, int CurrentFlow) 
-            : base(image, size, coordinates, CurrentFlow) 
+        public Sink(Image image, int size, Point coordinates) 
+            : base(image, size, coordinates) 
         {
             isEmpty = true;
         }

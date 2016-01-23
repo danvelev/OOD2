@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.workPanel = new System.Windows.Forms.Panel();
+            this.btSet = new System.Windows.Forms.Button();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.toolBox = new System.Windows.Forms.Panel();
             this.pbPump = new System.Windows.Forms.PictureBox();
@@ -49,7 +50,6 @@
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.btSet = new System.Windows.Forms.Button();
             this.workPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.toolBox.SuspendLayout();
@@ -76,6 +76,17 @@
             this.workPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.workPanel_Paint);
             this.workPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.workPanel_MouseClick);
             this.workPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.workPanel_MouseDown);
+            // 
+            // btSet
+            // 
+            this.btSet.Location = new System.Drawing.Point(3, 438);
+            this.btSet.Name = "btSet";
+            this.btSet.Size = new System.Drawing.Size(93, 23);
+            this.btSet.TabIndex = 1;
+            this.btSet.Text = "Set Percentage";
+            this.btSet.UseVisualStyleBackColor = true;
+            this.btSet.Visible = false;
+            this.btSet.Click += new System.EventHandler(this.btSet_Click);
             // 
             // trackBar1
             // 
@@ -265,16 +276,6 @@
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Help";
-            // 
-            // btSet
-            // 
-            this.btSet.Location = new System.Drawing.Point(3, 438);
-            this.btSet.Name = "btSet";
-            this.btSet.Size = new System.Drawing.Size(93, 23);
-            this.btSet.TabIndex = 1;
-            this.btSet.Text = "Set Percentage";
-            this.btSet.UseVisualStyleBackColor = true;
-            this.btSet.Visible = false;
             // 
             // Form1
             // 

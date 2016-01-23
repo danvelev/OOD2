@@ -19,13 +19,13 @@ namespace OOD2_project
         public int size { get; set; }
         public List<Connection> connections;
 
-        public Component(Image Image, int Size, Point coordinates, int CurrentFlow)
+        public Component(Image Image, int Size, Point coordinates)
         {
             this.point = coordinates;
             this.image = Image;
             this.size = Size;
             this.connections = new List<Connection>();
-            this.currentFlow = CurrentFlow;
+            //this.currentFlow = CurrentFlow;
         }
 
         /// <summary>

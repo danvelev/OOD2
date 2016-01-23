@@ -14,7 +14,7 @@ namespace OOD2_project
         private Connection output;
 
         public Pump(Image image, int size, Point coordinates, int CurrentFlow)
-            : base(image, size, coordinates, CurrentFlow)
+            : base(image, size, coordinates)
         {
 
         }
