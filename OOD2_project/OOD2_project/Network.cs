@@ -236,6 +236,16 @@ namespace OOD2_project
                                 {
                                     listComponents[i] = m;
                                     con.endComponent = m;
+                                    if (m.Output != null)
+                                    {
+                                        foreach (Connection x in listConnections)
+                                        {
+                                            if (x == m.Output)
+                                            {
+                                                x.flow = m.outFlow;
+                                            }
+                                        }
+                                    }
                                     this.listConnections.Add(con);
                                 }
                                 break;
@@ -248,6 +258,16 @@ namespace OOD2_project
                                 {
                                     listComponents[i] = m;
                                     con.endComponent = m;
+                                    if (m.Output != null)
+                                    {
+                                        foreach (Connection x in listConnections)
+                                        {
+                                            if (x == m.Output)
+                                            {
+                                                x.flow = m.outFlow;
+                                            }
+                                        }
+                                    }
                                     this.listConnections.Add(con);
                                 }
                                 break;

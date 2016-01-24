@@ -11,15 +11,15 @@ namespace OOD2_project
     [Serializable]
     public class Merger : Component
     {
-        private Connection upInput { get; set; }
-        private Connection lowInput { get; set; }
-        private Connection Output { get; set; }
+        public Connection upInput { get; set; }
+        public Connection lowInput { get; set; }
+        public Connection Output { get; set; }
         private int lowInflow;
         private int upInflow;
-        private int outFlow;
-        private bool counterLowIn = false;
-        private bool counterUpIn = false;
-        private bool counterOut = false;
+        public int outFlow;
+        public bool counterLowIn = false;
+        public bool counterUpIn = false;
+        public bool counterOut = false;
 
         public Rectangle upperLeft;
         public Rectangle lowerLeft;
@@ -68,6 +68,7 @@ namespace OOD2_project
             {
                 lowInput = c;
                 lowInflow = c.flow;
+                Merge();
                 counterLowIn = true;
             }
             else
@@ -84,6 +85,7 @@ namespace OOD2_project
             {
                 upInput = c;
                 upInflow = c.flow;
+                Merge();
                 counterUpIn = true;
             }
             else
@@ -99,6 +101,7 @@ namespace OOD2_project
             if (!counterOut)
             {
                 Output = c;
+                Merge();
                 c.flow = outFlow;
                 counterOut = true;
             }
