@@ -335,7 +335,7 @@ namespace OOD2_project
                     
                         pointsList.Add(p);
                         points = pointsList.ToArray();
-                        con = new Connection(startComponent, endComponent, Convert.ToInt32(tbCurrentFlow.Text), Convert.ToInt32(tbMaxFlow.Text), points);
+                        con = new Connection(startComponent, endComponent, Convert.ToInt32(tbMaxFlow.Text), points);
                         //adjSpliter.setInput(con,Convert.ToInt32(con.setFlow()));
                         this.network.AddConnection(ref con);
                         this.workPanel.Invalidate();

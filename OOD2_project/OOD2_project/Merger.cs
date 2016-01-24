@@ -16,6 +16,7 @@ namespace OOD2_project
         private Connection Output { get; set; }
         private int lowInflow;
         private int upInflow;
+        private int outFlow;
         private bool counterLowIn = false;
         private bool counterUpIn = false;
         private bool counterOut = false;
@@ -29,6 +30,9 @@ namespace OOD2_project
         {
             //this.upInput = UpInput;
             //this.lowInput = LowInput;
+            lowInflow = 0;
+            upInflow = 0;
+            outFlow = 0;
             upperLeft = new Rectangle(base.rect.Left, base.rect.Top, 27, 27);
             lowerLeft = new Rectangle(base.rect.Left, base.rect.Top + (base.rect.Height / 2), 27, 27);
             output = new Rectangle(base.rect.Left + (base.rect.Width / 2), base.rect.Top, base.rect.Width/2,base.rect.Height);
@@ -51,10 +55,10 @@ namespace OOD2_project
             // get the position of the component
         }
 
-        public int Merge()
+        public void Merge()
         {
             //merge the low and up outputs
-            return 0;
+            outFlow = upInflow + lowInflow;
         }
 
         public void setLowInput(ref Connection c)
@@ -95,6 +99,7 @@ namespace OOD2_project
             if (!counterOut)
             {
                 Output = c;
+                c.flow = outFlow;
                 counterOut = true;
             }
             else

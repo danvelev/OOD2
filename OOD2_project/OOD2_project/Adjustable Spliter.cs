@@ -13,7 +13,7 @@ namespace OOD2_project
     {
         private int lowPercentage;
         private int upPercentage;
-        private int currentFlow;
+        private int inFlow;
         public int upOutFlow;
         public int lowOutFlow;
         private Connection Input;
@@ -26,34 +26,37 @@ namespace OOD2_project
         public Adjustable_Spliter(Image image, int size, Point coordinates)
             : base(image, size, coordinates)
         {
-        
+            inFlow = 0;
+            upOutFlow = 0;
+            lowOutFlow = 0;
             //this.currentFlow = CurrentFlow;
         }
 
         public void Split(int value)
         {
            // input = base.currentFlow;
-            this.upOutFlow = currentFlow * ((value / 100) * currentFlow);
-            this.lowOutFlow = ((value / 100) * currentFlow);
+            this.upOutFlow = inFlow * ((value / 100) * inFlow);
+            this.lowOutFlow = ((value / 100) * inFlow);
         }
 
-        public void setInput(Connection conn)
+        public void setInput(ref Connection conn)
         {
             if (counterIn)
                 MessageBox.Show("You cannot have more than 1 Input");
             else
             {
                 this.Input = conn;
-                this.currentFlow = conn.flow;
+                this.inFlow = conn.flow;
                 counterIn = true;
             }
         }
 
-        public void SetUpOutput(Connection conn)
+        public void SetUpOutput(ref Connection conn)
         {
             if (counterUpOut)
             {
                 this.UpOutput = conn;
+                conn.flow = upOutFlow;
                 counterUpOut = true;
             }
             else
@@ -62,11 +65,12 @@ namespace OOD2_project
             }
         }
 
-        public void SetLowOutput(Connection con)
+        public void SetLowOutput(ref Connection con)
         {
             if (counterLowOut)
             {
                 this.LowOutput = con;
+                con.flow = lowOutFlow;
                 counterLowOut = true;
             }
             else

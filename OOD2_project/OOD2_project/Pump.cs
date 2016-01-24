@@ -64,6 +64,7 @@ namespace OOD2_project
             if (!isUsed)
             {
                 output = con;
+                con.flow = currentFlow;
                 isUsed = true;
             }
             else

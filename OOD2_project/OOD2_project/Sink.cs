@@ -19,6 +19,7 @@ namespace OOD2_project
         public Sink(Image image, int size, Point coordinates) 
             : base(image, size, coordinates) 
         {
+            inFlow = 0;
             isEmpty = true;
         }
 
@@ -54,7 +55,7 @@ namespace OOD2_project
         /// sets the pipe connected to the component
         /// </summary>
         /// <param name="con"></param>
-        public void setInput(Connection con)
+        public void setInput(ref Connection con)
         {
             if (isEmpty)
             {

@@ -17,11 +17,10 @@ namespace OOD2_project
         private int maxFlow;
         public Point[] curvePoints;
 
-        public Connection(Component StartComp, Component EndComp, int currentFlow, int MaxFlow, Point[] points)
+        public Connection(Component StartComp, Component EndComp, int MaxFlow, Point[] points)
         {
             this.startComponent = StartComp;
             this.endComponent = EndComp;
-            this.flow = currentFlow;
             this.maxFlow = MaxFlow;
             this.curvePoints = points;
         }

@@ -11,9 +11,9 @@ namespace OOD2_project
     [Serializable]
     public class Spliter : Component
     {
-        private int upOutFlow;
-        private int lowOutFlow;
-        private int inFlow;
+        public int upOutFlow;
+        public int lowOutFlow;
+        public int inFlow;
         private Connection Input;
         private Connection UpOutput;
         private Connection LowOutput;
@@ -31,6 +31,7 @@ namespace OOD2_project
         {
             this.lowOutFlow = 0;
             this.upOutFlow = 0;
+            this.inFlow = 0;
             upperRight = new Rectangle((base.rect.Right - (base.rect.Width / 2)+10), base.rect.Bottom - base.rect.Height, 30, 27);
             lowerRight = new Rectangle((base.rect.Right - (base.rect.Width / 2)+12), base.rect.Top + (base.rect.Height / 2), base.rect.Width / 2, (base.rect.Height / 2) + 1);
             input = new Rectangle(base.rect.Left, base.rect.Top, base.rect.Width / 2, base.rect.Height);
@@ -57,7 +58,7 @@ namespace OOD2_project
             else
             {
                 this.Input = conn;
-                this.currentFlow = conn.flow;
+                this.inFlow = conn.flow;
                 counterIn = true;
             }
             
