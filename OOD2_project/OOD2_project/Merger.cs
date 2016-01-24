@@ -29,9 +29,9 @@ namespace OOD2_project
         {
             //this.upInput = UpInput;
             //this.lowInput = LowInput;
-            upperLeft = new Rectangle(0, 0, 30, 20);
-            lowerLeft = new Rectangle(0, 21, 30, 20);
-            output = new Rectangle(33, 0, 35, 40);
+            upperLeft = new Rectangle(base.rect.Left, base.rect.Top, 27, 27);
+            lowerLeft = new Rectangle(base.rect.Left, base.rect.Top + (base.rect.Height / 2), 27, 27);
+            output = new Rectangle(base.rect.Left + (base.rect.Width / 2), base.rect.Top, base.rect.Width/2,base.rect.Height);
         }
 
         public void Clear(Connection con)
@@ -57,32 +57,40 @@ namespace OOD2_project
             return 0;
         }
 
-        public void setLowInput(Connection c, int flow)
+        public void setLowInput(ref Connection c)
         {
             //set the the low input
             if (!counterLowIn)
             {
                 lowInput = c;
+                lowInflow = c.flow;
                 counterLowIn = true;
             }
             else
+            {
                 MessageBox.Show("You cannot have more than 2 low Inputs in a Merger!");
+                c = null;
+            }
 
         }
 
-        public void setUpInput(Connection c)
+        public void setUpInput(ref Connection c)
         {
             if (!counterUpIn)
             {
                 upInput = c;
+                upInflow = c.flow;
                 counterUpIn = true;
             }
             else
+            {
                 MessageBox.Show("You cannot have more than 2 low Inputs in a Merger!");
-            //set the up input of the component
+                c = null;
+                //set the up input of the component
+            }
         }
 
-        public void setOutput(Connection c)
+        public void setOutput(ref Connection c)
         {
             if (!counterOut)
             {
@@ -90,7 +98,10 @@ namespace OOD2_project
                 counterOut = true;
             }
             else
+            {
+                c = null;
                 MessageBox.Show("You cannot have more than 2 low Inputs in a Merger!");
+            }
         }
 
 

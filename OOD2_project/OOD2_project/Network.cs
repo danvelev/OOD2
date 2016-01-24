@@ -110,9 +110,154 @@ namespace OOD2_project
         /// Add connection to the connections list
         /// </summary>
         /// <param name="con"></param>
-        public void AddConnection(Connection con)
+        public void AddConnection(ref Connection con)
         {
-            this.listConnections.Add(con);
+            
+
+            if (con.startComponent is Pump)
+            {
+
+                for (int i = 0; i < listComponents.Count; i++)
+                {
+                    if (listComponents.ElementAt(i) == con.startComponent)
+                    {
+                        Pump p = listComponents.ElementAt(i) as Pump;
+                        p.setOutput(ref con);
+                        if (con != null)
+                        {
+                            listComponents[i] = p;
+                            con.startComponent = p;
+                           // this.listConnections.Add(con);
+                        }
+
+                        break;
+                    }
+                }
+            }
+            else if (con.startComponent is Spliter)
+            {
+
+                for (int i = 0; i < listComponents.Count; i++)
+                {
+                    if (listComponents.ElementAt(i) == con.startComponent)
+                    {
+                        Spliter p = listComponents.ElementAt(i) as Spliter;
+                        Rectangle r1 = new Rectangle(con.curvePoints[0], new Size(2, 2));
+                        if (r1.IntersectsWith(p.upperRight))
+                        {
+                            p.SetUpOutput(ref con);
+                            if (con != null)
+                            {
+                                listComponents[i] = p;
+                                con.startComponent = p;
+                                //this.listConnections.Add(con);
+                            }
+                        }
+                        else if (r1.IntersectsWith(p.lowerRight))
+                        {
+                            p.SetLowOutput(ref con);
+                            if (con != null)
+                            {
+                                listComponents[i] = p;
+                                con.startComponent = p;
+                                //this.listConnections.Add(con);
+                            }
+                        }
+                        break;
+                    }
+                }
+            } 
+            else if (con.startComponent is Adjustable_Spliter)
+            {
+
+                for (int i = 0; i < listComponents.Count; i++)
+                {
+                    if (listComponents.ElementAt(i) == con.startComponent)
+                    {
+                        Spliter p = listComponents.ElementAt(i) as Spliter;
+                        Rectangle r1 = new Rectangle(con.curvePoints[0], new Size(2, 2));
+                        if (r1.IntersectsWith(p.upperRight))
+                        {
+                            p.SetUpOutput(ref con);
+                            if (con != null)
+                            {
+                                listComponents[i] = p;
+                                con.startComponent = p;
+                                //this.listConnections.Add(con);
+                            }
+                        }
+                        else if (r1.IntersectsWith(p.lowerRight))
+                        {
+                            p.SetLowOutput(ref con);
+                            if (con != null)
+                            {
+                                listComponents[i] = p;
+                                con.startComponent = p;
+                                //this.listConnections.Add(con);
+                            }
+                        }
+                        break;
+                    }
+                }
+            } 
+            else if (con.startComponent is Merger)
+            {
+
+                for (int i = 0; i < listComponents.Count; i++)
+                {
+                    if (listComponents.ElementAt(i) == con.startComponent)
+                    {
+                        Merger m = listComponents.ElementAt(i) as Merger;
+                        m.setOutput(ref con);
+                        if (con != null)
+                        {
+                            listComponents[i] = m;
+                            con.startComponent = m;
+                           // this.listConnections.Add(con);
+                        }
+                        break;
+                    }
+                }
+            }
+            if (con != null)
+            {
+                if (con.endComponent is Merger)
+                {
+                    for (int i = 0; i < listComponents.Count; i++)
+                    {
+                        if (listComponents.ElementAt(i) == con.endComponent)
+                        {
+                            Merger m = listComponents.ElementAt(i) as Merger;
+                            Rectangle r1 = new Rectangle(con.curvePoints[con.curvePoints.Count() - 1], new Size(2, 2));
+                            if (r1.IntersectsWith(m.lowerLeft))
+                            {
+                                m.setLowInput(ref con);
+                                if (con != null)
+                                {
+                                    listComponents[i] = m;
+                                    con.endComponent = m;
+                                    this.listConnections.Add(con);
+                                }
+                                break;
+                            }
+
+                            else if (r1.IntersectsWith(m.upperLeft))
+                            {
+                                m.setUpInput(ref con);
+                                if (con != null)
+                                {
+                                    listComponents[i] = m;
+                                    con.endComponent = m;
+                                    this.listConnections.Add(con);
+                                }
+                                break;
+                            }
+                        }
+
+                    }
+                }
+            }
+            
         }
 
 

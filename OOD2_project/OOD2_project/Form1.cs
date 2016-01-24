@@ -124,7 +124,8 @@ namespace OOD2_project
             }
             if (pipeActivate && endComponent != null)
             {
-                con.DrawConnection(gr);
+                if(con != null)
+                    con.DrawConnection(gr);
                 pointsList = new List<Point>();
                 startComponent = null;
                 endComponent = null;
@@ -336,7 +337,7 @@ namespace OOD2_project
                         points = pointsList.ToArray();
                         con = new Connection(startComponent, endComponent, Convert.ToInt32(tbCurrentFlow.Text), Convert.ToInt32(tbMaxFlow.Text), points);
                         //adjSpliter.setInput(con,Convert.ToInt32(con.setFlow()));
-                        this.network.listConnections.Add(con);
+                        this.network.AddConnection(ref con);
                         this.workPanel.Invalidate();
                 }
 

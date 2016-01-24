@@ -27,6 +27,8 @@ namespace OOD2_project
 
         public void Clear()
         {
+            isUsed = false;
+            output = null;
         }
 
         public override void DrawComponent(Graphics gr)
@@ -57,10 +59,18 @@ namespace OOD2_project
             return base.getPosition();
         }
 
-        public void setOutput(Connection con)
+        public void setOutput(ref Connection con)
         {
-            output = con;
-            isUsed = true;
+            if (!isUsed)
+            {
+                output = con;
+                isUsed = true;
+            }
+            else
+            {
+                MessageBox.Show("You cannot have more than 1 output in a Pump");
+                con = null;
+            }
         }
 
 

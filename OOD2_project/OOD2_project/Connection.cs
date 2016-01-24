@@ -15,7 +15,7 @@ namespace OOD2_project
         public Color color;
         public int flow;
         private int maxFlow;
-        private Point[] curvePoints;
+        public Point[] curvePoints;
 
         public Connection(Component StartComp, Component EndComp, int currentFlow, int MaxFlow, Point[] points)
         {

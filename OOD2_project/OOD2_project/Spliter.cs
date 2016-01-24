@@ -21,12 +21,23 @@ namespace OOD2_project
         private bool counterUpOut = false;
         private bool counterLowOut = false;
 
+        public Rectangle upperRight;
+        public Rectangle lowerRight;
+        public Rectangle input;
+
 
         public Spliter(Image image, int size, Point coordinates)
             : base(image, size, coordinates)
         {
             this.lowOutFlow = 0;
-            this.upOutFlow = 0;           
+            this.upOutFlow = 0;
+            upperRight = new Rectangle((base.rect.Right - (base.rect.Width / 2)+10), base.rect.Bottom - base.rect.Height, 30, 27);
+            lowerRight = new Rectangle((base.rect.Right - (base.rect.Width / 2)+12), base.rect.Top + (base.rect.Height / 2), base.rect.Width / 2, (base.rect.Height / 2) + 1);
+            input = new Rectangle(base.rect.Left, base.rect.Top, base.rect.Width / 2, base.rect.Height);
+
+            //upperRight = new Rectangle(base.rect.Left + (base.rect.Width / 2), base.rect.Top + (base.rect.Width / 2), base.rect.Width / 2, base.rect.Height / 2);
+            //lowerRight = new Rectangle(base.rect.Left + (base.rect.Width / 2), base.rect.Top + (base.rect.Height / 2), base.rect.Width / 2, base.rect.Height / 2);
+            //input = new Rectangle(base.rect.Left, base.rect.Top, base.rect.Width / 2, base.rect.Height);
         }
 
         public void Split()
@@ -36,22 +47,25 @@ namespace OOD2_project
             this.lowOutFlow = currentFlow / 2;
         }
 
-        public void setInput(Connection conn, int flow)
+        public void setInput( ref Connection conn)
         {
             if (counterIn)
+            {
                 MessageBox.Show("You cannot have more than 1 Input");
+                conn = null;
+            }
             else
             {
                 this.Input = conn;
-                this.currentFlow = flow;
+                this.currentFlow = conn.flow;
                 counterIn = true;
             }
             
         }
 
-        public void SetUpOutput(Connection conn)
+        public void SetUpOutput(ref Connection conn)
         {
-            if (counterUpOut)
+            if (!counterUpOut)
             {
                 this.UpOutput = conn;
                 conn.flow = upOutFlow;
@@ -60,12 +74,13 @@ namespace OOD2_project
             else
             {
                 MessageBox.Show("You can not have more than 2 up Outputs");
+                conn = null;
             }
         }
 
-        public void SetLowOutput(Connection con)
+        public void SetLowOutput(ref Connection con)
         {
-            if (counterLowOut)
+            if (!counterLowOut)
             {
                 this.LowOutput = con;
                 con.flow = lowOutFlow;
@@ -74,6 +89,7 @@ namespace OOD2_project
             else
             {
                 MessageBox.Show("You can not have more than 2 low Outputs");
+                con = null;
             }
         }
 
