@@ -66,7 +66,10 @@ namespace OOD2_project
                 isEmpty = false;
             }
             else
+            {
+                con = null;
                 MessageBox.Show("You cannot have more than one Input in the Sink!");
+            }
         }
 
     }

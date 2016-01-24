@@ -47,8 +47,8 @@ namespace OOD2_project
         public void Split()
         {
            // input = base.currentFlow;
-            this.upOutFlow = inFlow * percentage / 100;
-            this.lowOutFlow = inFlow - upOutFlow; 
+            this.lowOutFlow = inFlow * percentage / 100;
+            this.upOutFlow = inFlow - lowOutFlow; 
         }
 
         public void Clear(Connection con)
@@ -76,7 +76,10 @@ namespace OOD2_project
         public void setInput(ref Connection conn)
         {
             if (counterIn)
+            {
+                conn = null;
                 MessageBox.Show("You cannot have more than 1 Input");
+            }
             else
             {
                 this.Input = conn;
@@ -97,6 +100,7 @@ namespace OOD2_project
             }
             else
             {
+                conn = null;
                 MessageBox.Show("You can not have more than 2 up Outputs");
             }
         }
@@ -112,6 +116,7 @@ namespace OOD2_project
             }
             else
             {
+                con = null;
                 MessageBox.Show("You can not have more than 2 low Outputs");
             }
         }
