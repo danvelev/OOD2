@@ -51,6 +51,8 @@
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lbPrc = new System.Windows.Forms.Label();
+            this.lbCompPrc = new System.Windows.Forms.Label();
             this.workPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.toolBox.SuspendLayout();
@@ -66,6 +68,8 @@
             // workPanel
             // 
             this.workPanel.BackColor = System.Drawing.Color.White;
+            this.workPanel.Controls.Add(this.lbCompPrc);
+            this.workPanel.Controls.Add(this.lbPrc);
             this.workPanel.Controls.Add(this.btSet);
             this.workPanel.Controls.Add(this.trackBar1);
             this.workPanel.Location = new System.Drawing.Point(164, 29);
@@ -80,7 +84,7 @@
             // 
             // btSet
             // 
-            this.btSet.Location = new System.Drawing.Point(3, 438);
+            this.btSet.Location = new System.Drawing.Point(18, 438);
             this.btSet.Name = "btSet";
             this.btSet.Size = new System.Drawing.Size(93, 23);
             this.btSet.TabIndex = 1;
@@ -91,11 +95,11 @@
             // 
             // trackBar1
             // 
-            this.trackBar1.Location = new System.Drawing.Point(32, 331);
+            this.trackBar1.Location = new System.Drawing.Point(32, 237);
             this.trackBar1.Maximum = 100;
             this.trackBar1.Name = "trackBar1";
             this.trackBar1.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.trackBar1.Size = new System.Drawing.Size(45, 104);
+            this.trackBar1.Size = new System.Drawing.Size(45, 198);
             this.trackBar1.SmallChange = 10;
             this.trackBar1.TabIndex = 0;
             this.trackBar1.TickFrequency = 10;
@@ -284,6 +288,27 @@
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Help";
             // 
+            // lbPrc
+            // 
+            this.lbPrc.AutoSize = true;
+            this.lbPrc.Font = new System.Drawing.Font("Papyrus", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbPrc.Location = new System.Drawing.Point(70, 237);
+            this.lbPrc.Name = "lbPrc";
+            this.lbPrc.Size = new System.Drawing.Size(26, 198);
+            this.lbPrc.TabIndex = 2;
+            this.lbPrc.Text = "100\r\n90\r\n80\r\n70\r\n60\r\n50\r\n40\r\n30\r\n20\r\n10\r\n0";
+            this.lbPrc.Visible = false;
+            // 
+            // lbCompPrc
+            // 
+            this.lbCompPrc.AutoSize = true;
+            this.lbCompPrc.Location = new System.Drawing.Point(60, 24);
+            this.lbCompPrc.Name = "lbCompPrc";
+            this.lbCompPrc.Size = new System.Drawing.Size(35, 13);
+            this.lbCompPrc.TabIndex = 3;
+            this.lbCompPrc.Text = "label3";
+            this.lbCompPrc.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -338,6 +363,8 @@
         private System.Windows.Forms.PictureBox pbPipe;
         private System.Windows.Forms.TrackBar trackBar1;
         private System.Windows.Forms.Button btSet;
+        private System.Windows.Forms.Label lbPrc;
+        private System.Windows.Forms.Label lbCompPrc;
     }
 }
 

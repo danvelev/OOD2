@@ -37,14 +37,14 @@ namespace OOD2_project
             this.lowOutFlow = ((value / 100) * currentFlow);
         }
 
-        public void setInput(Connection conn, int flow)
+        public void setInput(Connection conn)
         {
             if (counterIn)
                 MessageBox.Show("You cannot have more than 1 Input");
             else
             {
                 this.Input = conn;
-                this.currentFlow = flow;
+                this.currentFlow = conn.flow;
                 counterIn = true;
             }
         }

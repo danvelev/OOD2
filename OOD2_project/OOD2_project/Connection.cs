@@ -13,7 +13,7 @@ namespace OOD2_project
         public Component startComponent;
         public Component endComponent;
         public Color color;
-        private int flow;
+        public int flow;
         private int maxFlow;
         private Point[] curvePoints;
 
@@ -33,7 +33,7 @@ namespace OOD2_project
         /// </summary>
         public string setFlow()
         {
-            return "Flow is: " + flow;
+            return "Current flow is: " + flow;
         }
 
         /// <summary>
@@ -49,7 +49,10 @@ namespace OOD2_project
                 return false;
         }
 
-        //need to be finished..
+        /// <summary>
+        /// Drawing the connectinos between the components
+        /// </summary>
+        /// <param name="gr"></param>
         public void DrawConnection(Graphics gr)
         {
            // switch (startComponent)
@@ -58,13 +61,16 @@ namespace OOD2_project
                     //gr.DrawLines(new Pen(Brushes.Red, 5), curvePoints);
                     //break;
             //}
+
             if (IsCriticalSection())
             {
                 gr.DrawLines(new Pen(Brushes.Red, 5), curvePoints);
+                gr.DrawString(setFlow(), new Font(FontFamily.GenericSerif, 10, FontStyle.Regular), Brushes.Red, ((startComponent.getPosition().X + endComponent.getPosition().X)/2) , ((startComponent.getPosition().Y + endComponent.getPosition().Y)/2) );
             }
             else
                 gr.DrawLines(new Pen(Brushes.Green, 5), curvePoints);
-
+                gr.DrawString(setFlow(), new Font(FontFamily.GenericSerif, 10, FontStyle.Regular), Brushes.Green, ((startComponent.getPosition().X + endComponent.getPosition().X) / 2), ((startComponent.getPosition().Y + endComponent.getPosition().Y) / 2));
+            
         }
     }
 }

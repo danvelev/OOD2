@@ -15,7 +15,7 @@ namespace OOD2_project
         private int currentFlow;
         private Connection output;
         Rectangle rect;
-        public bool isUsed;
+        public bool isUsed { get; set; }
 
         public Pump(Image image, int size, Point coordinates, int CurrentFlow)
             : base(image, size, coordinates)
@@ -32,10 +32,9 @@ namespace OOD2_project
         public override void DrawComponent(Graphics gr)
         {
             try
-            {
-                
-                //rect.
+            { 
                 gr.DrawImage(base.image, base.rect);
+                gr.DrawString(Convert.ToString(getFlow()), new Font(FontFamily.GenericSerif, 17, FontStyle.Bold), Brushes.Green , new Point(getPosition().X + 10 ,getPosition().Y +12));
             }
             catch (Exception ex)
             {

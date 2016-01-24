@@ -30,24 +30,7 @@ namespace OOD2_project
             //this.currentFlow = CurrentFlow;
         }
 
-        /// <summary>
-        /// Add connection to the connections list
-        /// </summary>
-        /// <param name="con"></param>
-        public void AddConnection(Connection con)
-        {
-            this.connections.Add(con);
-        }
-
-        /// <summary>
-        /// Remove connection from the connections list
-        /// </summary>
-        /// <param name="con"></param>
-        public void RemoveConnection(Connection con)
-        {
-            this.connections.Remove(con);
-        }
-
+        
         /// <summary>
         /// Returns the position of the component. It will be implemented in the sub classes
         /// </summary>
@@ -59,11 +42,14 @@ namespace OOD2_project
         /// </summary>
         public List<Connection> getConnections() { return connections; }
 
+        /// <summary>
+        /// Drawing the components on the network design
+        /// </summary>
+        /// <param name="gr"></param>
         public virtual void DrawComponent(Graphics gr)
         {
             try
             {
-                
                 gr.DrawImage(image, rect);
             }
             catch (Exception ex)

@@ -54,6 +54,7 @@ namespace OOD2_project
             if (counterUpOut)
             {
                 this.UpOutput = conn;
+                conn.flow = upOutFlow;
                 counterUpOut = true;
             }
             else
@@ -67,6 +68,7 @@ namespace OOD2_project
             if (counterLowOut)
             {
                 this.LowOutput = con;
+                con.flow = lowOutFlow;
                 counterLowOut = true;
             }
             else

@@ -21,12 +21,9 @@ namespace OOD2_project
         private string selectedComponent;
         private bool isSelected = false; //To show that there is a selected component..
         public Network network;
-        public ContextMenu cm = new ContextMenu();
         private Point point;
         private Component startComponent;
         private Component endComponent;
-        private int upPercentage;
-        private int lowPercentage;
         private Adjustable_Spliter adjSpliter;
         Connection con;
         private Point[] points;
@@ -37,29 +34,11 @@ namespace OOD2_project
             InitializeComponent();
             pointsList = new List<Point>();
             this.network = new Network(workPanel.Height, workPanel.Width);
-            cm.MenuItems.Add("Remove");
-            cm.MenuItems.Add("Edit");
         }
 
         private void workPanel_MouseDown(object sender, MouseEventArgs e)
         {
-            //Point p = new Point(e.X, e.Y);      //workPanel.PointToClient(new Point(e.X, e.Y));
-            ////foreach (var compt in this.network.listComponents)
-            ////{
-            ////    if (compt.point == p)
-            ////    {
-            ////        cm.Show(this.workPanel, );
-            ////    }
-            ////}
-
-            //// dasdas
-            //if (pipeActivate)
-            //{
-            //    if (startComponent == null || endComponent == null)
-            //    {
-            //        this.addConnectionPoints(p);
-            //    }
-            //}
+          
         }
 
         //Drawing the component on the workPanel..
@@ -91,10 +70,12 @@ namespace OOD2_project
                     case "adjSpliter":
                         trackBar1.Visible = true;
                         btSet.Visible = true;
+                        lbPrc.Visible = true;
                         if (!this.network.checkOverlap(point))
                         {
                             this.adjSpliter = new Adjustable_Spliter(selectedImage, (this.workPanel.Width - (this.workPanel.Width - selectedImage.Width)), point);
                             this.network.listComponents.Add(adjSpliter);
+                            isSelected = false;
                         }
                         else
                             MessageBox.Show("Components cannot overlap!");
@@ -123,9 +104,9 @@ namespace OOD2_project
                         else
                             MessageBox.Show("Components cannot overlap!");
                         break;
-                    case "pipe":
-                        //this.network.listConnections.Add(new Connection(startComponent, endComponent, Convert.ToInt32(tbCurrentFlow.Text),Convert.ToInt32(tbMaxFlow),points));
-                        break;
+                    //case "pipe":
+                    //    //this.network.listConnections.Add(new Connection(startComponent, endComponent, Convert.ToInt32(tbCurrentFlow.Text),Convert.ToInt32(tbMaxFlow),points));
+                    //    break;
                 }
                 foreach(Component com in this.network.listComponents)
                 {
@@ -205,13 +186,11 @@ namespace OOD2_project
 
         private void pbPipe_MouseDown(object sender, MouseEventArgs e)
         {
-            //isSelected = false;
             Cursor.Current = Cursors.Cross;
             pbPump.BorderStyle = BorderStyle.FixedSingle;
             selectedImage = pbPipe.Image;
             selectedComponent = "pipe";
             pbPump.DoDragDrop(selectedImage, DragDropEffects.Copy);
-            //isSelected = true;
             pipeActivate = true;
         }
 
@@ -226,9 +205,6 @@ namespace OOD2_project
             if (selectedImage != null)
             {
                 point = workPanel.PointToClient(new Point(e.X, e.Y));
-                //this.network.component = new Component(selectedImage, (this.workPanel.Width - (this.workPanel.Width - selectedImage.Width)), p, Convert.ToInt32(this.tbCurrentFlow.Text));
-                //network.component.point = p;
-                //this.network.listComponents.Add(this.network.component);
                 this.workPanel.Invalidate();
             }
         }
@@ -257,7 +233,7 @@ namespace OOD2_project
             selectedImage = null;
             pbAdjustableSpliter.BorderStyle = BorderStyle.None;
             point = new Point(e.X, e.Y);
-            trackBar1.Visible = true;
+            //trackBar1.Visible = true;
             
         }
 
@@ -281,18 +257,12 @@ namespace OOD2_project
             pbPipe.BorderStyle = BorderStyle.None;
         }
 
+        //Checks where the user click..
         private void workPanel_MouseClick(object sender, MouseEventArgs e)
         {
-            Point p = new Point(e.X, e.Y); //workPanel.PointToClient(new Point(e.X, e.Y));
-            //foreach (var compt in this.network.listComponents)
-            //{
-            //    if (compt.point == p)
-            //    {
-            //        cm.Show(this.workPanel, );
-            //    }
-            //}
+            //The point where the user click
+            Point p = new Point(e.X, e.Y); 
 
-            // dasdas
             if (pipeActivate)
             {
                 if (startComponent == null || endComponent == null)
@@ -300,7 +270,41 @@ namespace OOD2_project
                     this.addConnectionPoints(p);
                 }
             }
+            if (e.Button == MouseButtons.Right)
+            {
+                if (this.network.listComponents.Count >= 1 && this.network.getComponent(p) != null)
+                {
+                    
+                         MenuItem[] menuItems = new MenuItem[2];
+                        menuItems[0] = new MenuItem("Remove Connection(s)");
+                        menuItems[1] = new MenuItem("Remove Component");
+                        ContextMenu buttonMenu = new ContextMenu(menuItems);
+                        buttonMenu.Show(workPanel, new System.Drawing.Point(p.X, p.Y));
+                        menuItems[0].Click += new EventHandler((obj, evargs) => menuItem_click(obj, evargs, p, menuItems));
+                        menuItems[1].Click += new EventHandler((obj, evargs) => menuItem_click(obj, evargs, p, menuItems));
+             
+                  }
+            }
           
+        }
+
+        public void menuItem_click(object sender, EventArgs e, Point point, MenuItem[] menuItems)
+        {
+            //MenuItem Delete Connection from the list with connections
+            if (sender == menuItems[0])
+            {
+              
+            }
+            //MenuItem Delete Component form the list with components
+            if (sender == menuItems[1])
+            {
+                //MUST BE FIXED !!!!!
+              // this.network.RemoveComponent(this.network.getComponent(point));
+               
+               // isSelected = false;
+               // this.network.getComponent(point).RemoveConnection(this.network.getConnection();
+            }
+            workPanel.Invalidate();
         }
 
         /// <summary>
@@ -320,16 +324,18 @@ namespace OOD2_project
                         startComponent = null;
                     }
                     else
-                        pointsList.Add(p);
+                        pointsList.Add(new Point(p.X + 10, p.Y + 5));
                 }
                 else if (endComponent == null)
                 {
                     endComponent = this.network.getComponent(p);
-                    pointsList.Add(p);
-                    points = pointsList.ToArray();
-                    con = new Connection(startComponent, endComponent, Convert.ToInt32(tbCurrentFlow.Text), Convert.ToInt32(tbMaxFlow.Text), points);
-                    this.network.listConnections.Add(con);
-                    this.workPanel.Invalidate();
+                    
+                        pointsList.Add(p);
+                        points = pointsList.ToArray();
+                        con = new Connection(startComponent, endComponent, Convert.ToInt32(tbCurrentFlow.Text), Convert.ToInt32(tbMaxFlow.Text), points);
+                        //adjSpliter.setInput(con,Convert.ToInt32(con.setFlow()));
+                        this.network.listConnections.Add(con);
+                        this.workPanel.Invalidate();
                 }
 
             }
@@ -346,6 +352,7 @@ namespace OOD2_project
         {
             trackBar1.Visible = false;
             btSet.Visible = false;
+            lbPrc.Visible = false;
             adjSpliter.Split(trackBar1.Value);
              
         }
@@ -393,6 +400,35 @@ namespace OOD2_project
             }
         }
 
+        /// <summary>
+        /// Method to Open a file with network
+        /// </summary>
+        public bool OpenFile()
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                FileStream fs = null;
+                BinaryFormatter bf = null;
+
+                openFileDialog.Filter = "SimulatorExtension files (*.simex)|*.simex";
+                openFileDialog.FilterIndex = 1;
+                openFileDialog.RestoreDirectory = true;
+
+
+                fs = new FileStream(openFileDialog.FileName, FileMode.Open, FileAccess.Read);
+                bf = new BinaryFormatter();
+                Network loadNetwork = (Network)(bf.Deserialize(fs));
+                this.network = loadNetwork;
+                this.network.listComponents = loadNetwork.listComponents;
+                this.network.listConnections = loadNetwork.listConnections;
+                return true;
+            }
+            else
+                return false;
+        }
+
         private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (this.network.listComponents.Count >= 1)
@@ -401,21 +437,22 @@ namespace OOD2_project
                 if (dialogResult == DialogResult.Yes)
                 {
                     this.network.SaveAs(this.network);
-                    this.network.OpenFile();
-                    //this.isSelected = false;
-                    this.workPanel.Invalidate();
+                    this.OpenFile();
+                    isSelected = true;
+                    workPanel.Invalidate();
                 }
                 else
-                    this.network.OpenFile();
-                // this.isSelected = false;
-                this.workPanel.Invalidate();
+                    this.OpenFile();
+                    this.isSelected = true;
+                workPanel.Invalidate();
             }
             else
             {
-                this.network.OpenFile();
-                //this.isSelected = false;
-                this.workPanel.Invalidate();
+                this.OpenFile();
+                this.isSelected = true;
+                workPanel.Invalidate();
             }
+           // workPanel.Invalidate();
 
         }
 

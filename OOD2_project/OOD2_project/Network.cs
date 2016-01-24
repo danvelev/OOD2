@@ -55,11 +55,16 @@ namespace OOD2_project
             }
         }
 
+        /// <summary>
+        /// Check if two components are overlaping 
+        /// </summary>
+        /// <param name="p"></param>
         public bool checkOverlap(Point p)
         {
             Rectangle r2 = new Rectangle(p, new Size(1, 1));
             foreach (Component comp in listComponents)
             {
+                //Checks the intersection
                 if (comp.rect.IntersectsWith(r2))
                 {
                     return true;
@@ -69,11 +74,16 @@ namespace OOD2_project
             return false;
         }
 
+        /// <summary>
+        /// Get component from the components list
+        /// </summary>
+        /// <param name="p"></param>
         public Component getComponent(Point p)
         {
             Rectangle r2 = new Rectangle(p, new Size(5, 5));
             foreach (Component comp in listComponents)
             {
+                //Check if the clicked position intersect with some of the components
                 if (r2.IntersectsWith(comp.rect))
                 {
                     return comp;
@@ -83,6 +93,10 @@ namespace OOD2_project
             return null;
         }
 
+        /// <summary>
+        /// Get connection from the connections list
+        /// </summary>
+        /// <param name="conn"></param>
         public Connection getConnection(Connection conn)
         {
             foreach (Connection c in listConnections)
@@ -93,37 +107,53 @@ namespace OOD2_project
             return null;
         }
         /// <summary>
-        /// Method to Open a file with network
+        /// Add connection to the connections list
         /// </summary>
-        public bool OpenFile()
+        /// <param name="con"></param>
+        public void AddConnection(Connection con)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                FileStream fs = null;
-                BinaryFormatter bf = null;
-
-                openFileDialog.Filter = "SimulatorExtension files (*.simex)|*.simex";
-                openFileDialog.FilterIndex = 1;
-                openFileDialog.RestoreDirectory = true;
+            this.listConnections.Add(con);
+        }
 
 
-                fs = new FileStream(openFileDialog.FileName, FileMode.Open, FileAccess.Read);
-                bf = new BinaryFormatter();
-                Network loadNetwork = (Network)(bf.Deserialize(fs));
-                this.listComponents = loadNetwork.listComponents;
-                this.listConnections = loadNetwork.listConnections;
-                return true;
-            }
-            else
-                return false;
+        /// <summary>
+        /// Remove component from the components list
+        /// </summary>
+        /// <param name="comp"></param>
+        //public void RemoveComponent(Component comp)
+        //{
+        //    foreach (Component cmp in listComponents)
+        //    {
+        //        if (comp == cmp)
+        //        {
+                        
+        //                    this.RemoveConnection(c);
+        //                    this.listComponents.Remove(cmp);
+                        
+        //            }
+        //        }
+        //    }
+        // }
+    
+            
+          
+
+            
+        
+
+        /// <summary>
+        /// Remove connection from the connections list
+        /// </summary>
+        /// <param name="con"></param>
+        public void RemoveConnection(Connection con)
+        {
+            this.listConnections.Remove(con);
         }
 
         /// <summary>
-        /// save as a design 
+        /// SaveAs method to save the whole network
         /// </summary>
-        /// <param name="stream"></param>
+        /// <param name="network"></param>
         public bool SaveAs(Network network)
         {
             SaveFileDialog dialog = new SaveFileDialog();
@@ -149,6 +179,8 @@ namespace OOD2_project
             return false;
 
         }
+
+     
 
     }
     
