@@ -120,26 +120,11 @@ namespace OOD2_project
         /// Remove component from the components list
         /// </summary>
         /// <param name="comp"></param>
-        //public void RemoveComponent(Component comp)
-        //{
-        //    foreach (Component cmp in listComponents)
-        //    {
-        //        if (comp == cmp)
-        //        {
-                        
-        //                    this.RemoveConnection(c);
-        //                    this.listComponents.Remove(cmp);
-                        
-        //            }
-        //        }
-        //    }
-        // }
-    
-            
-          
-
-            
-        
+        public void RemoveComponent(Component comp)
+        {
+                   // this.RemoveConnection();
+                    this.listComponents.Remove(comp);
+        }
 
         /// <summary>
         /// Remove connection from the connections list

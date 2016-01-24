@@ -61,15 +61,16 @@ namespace OOD2_project
                     //gr.DrawLines(new Pen(Brushes.Red, 5), curvePoints);
                     //break;
             //}
-
-            if (IsCriticalSection())
-            {
-                gr.DrawLines(new Pen(Brushes.Red, 5), curvePoints);
-                gr.DrawString(setFlow(), new Font(FontFamily.GenericSerif, 10, FontStyle.Regular), Brushes.Red, ((startComponent.getPosition().X + endComponent.getPosition().X)/2) , ((startComponent.getPosition().Y + endComponent.getPosition().Y)/2) );
-            }
-            else
-                gr.DrawLines(new Pen(Brushes.Green, 5), curvePoints);
-                gr.DrawString(setFlow(), new Font(FontFamily.GenericSerif, 10, FontStyle.Regular), Brushes.Green, ((startComponent.getPosition().X + endComponent.getPosition().X) / 2), ((startComponent.getPosition().Y + endComponent.getPosition().Y) / 2));
+            
+                if (IsCriticalSection())
+                {
+                    gr.DrawLines(new Pen(Brushes.Red, 5), curvePoints);
+                    gr.DrawString(setFlow(), new Font(FontFamily.GenericSerif, 10, FontStyle.Regular), Brushes.Red, ((startComponent.getPosition().X + endComponent.getPosition().X) / 2), ((startComponent.getPosition().Y + endComponent.getPosition().Y) / 2));
+                }
+                else
+                    gr.DrawLines(new Pen(Brushes.Green, 5), curvePoints);
+                    gr.DrawString(setFlow(), new Font(FontFamily.GenericSerif, 10, FontStyle.Regular), Brushes.Green, ((startComponent.getPosition().X + endComponent.getPosition().X) / 2), ((startComponent.getPosition().Y + endComponent.getPosition().Y) / 2));
+            
             
         }
     }

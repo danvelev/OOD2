@@ -118,7 +118,8 @@ namespace OOD2_project
                 }
                 foreach (Connection c in this.network.listConnections)
                 {
-                    c.DrawConnection(gr);
+                   
+                        c.DrawConnection(gr);
                 }
             }
             if (pipeActivate && endComponent != null)
@@ -269,6 +270,7 @@ namespace OOD2_project
                 {
                     this.addConnectionPoints(p);
                 }
+               
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -299,7 +301,7 @@ namespace OOD2_project
             if (sender == menuItems[1])
             {
                 //MUST BE FIXED !!!!!
-              // this.network.RemoveComponent(this.network.getComponent(point));
+              this.network.RemoveComponent(this.network.getComponent(point));
                
                // isSelected = false;
                // this.network.getComponent(point).RemoveConnection(this.network.getConnection();
