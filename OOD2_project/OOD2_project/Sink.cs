@@ -11,7 +11,7 @@ namespace OOD2_project
     [Serializable]
     public class Sink : Component
     {
-        private Connection input;
+        public Connection input;
         private bool isEmpty;
         private int inFlow;
         Rectangle rect;
@@ -25,7 +25,9 @@ namespace OOD2_project
 
         public void Clear()
         {
-
+            input = null;
+            isEmpty = true;
+            inFlow = 0;
         }
 
         public override void DrawComponent(Graphics gr)

@@ -41,7 +41,25 @@ namespace OOD2_project
         public void Clear(Connection con)
         {
             //remove all connections related to a component
-            this.connections.Remove(con);
+            if (con == this.Output)
+            {
+                counterOut = false;
+                Output = null;
+            }
+            else if (con == this.lowInput)
+            {
+                counterLowIn = false;
+                lowInflow = 0;
+                outFlow = upInflow;
+                lowInput = null;
+            }
+            else if (con == this.upInput)
+            {
+                counterUpIn = false;
+                upInflow = 0;
+                outFlow = lowInflow;
+                lowInput = null;
+            }
         }
 
         public void DrawComponent(Graphics gr, Point p)

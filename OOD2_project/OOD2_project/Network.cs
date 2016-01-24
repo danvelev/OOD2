@@ -174,7 +174,7 @@ namespace OOD2_project
                 {
                     if (listComponents.ElementAt(i) == con.startComponent)
                     {
-                        Spliter p = listComponents.ElementAt(i) as Spliter;
+                        Adjustable_Spliter p = listComponents.ElementAt(i) as Adjustable_Spliter;
                         Rectangle r1 = new Rectangle(con.curvePoints[0], new Size(2, 2));
                         if (r1.IntersectsWith(p.upperRight))
                         {
@@ -276,6 +276,108 @@ namespace OOD2_project
 
                     }
                 }
+
+                else if (con.endComponent is Sink)
+                {
+                    for (int i = 0; i < listComponents.Count; i++)
+                    {
+                        if (listComponents.ElementAt(i) == con.endComponent)
+                        {
+                            Sink p = listComponents.ElementAt(i) as Sink;
+                            p.setInput(ref con);
+                            if (con != null)
+                            {
+                                listComponents[i] = p;
+                                con.endComponent = p;
+                                this.listConnections.Add(con);
+                            }
+
+                            break;
+                        }
+                    }
+                }
+                else if (con.endComponent is Spliter)
+                {
+
+                    for (int i = 0; i < listComponents.Count; i++)
+                    {
+                        if (listComponents.ElementAt(i) == con.endComponent)
+                        {
+                            Spliter p = listComponents.ElementAt(i) as Spliter;
+                            Rectangle r1 = new Rectangle(con.curvePoints[con.curvePoints.Count() - 1], new Size(2, 2));
+                            if (r1.IntersectsWith(p.input))
+                            {
+                                p.setInput(ref con);
+                                if (con != null)
+                                {
+                                    listComponents[i] = p;
+                                    con.endComponent = p;
+                                    if (p.UpOutput != null)
+                                    {
+                                        foreach (Connection x in listConnections)
+                                        {
+                                            if (x == p.UpOutput)
+                                                x.flow = p.upOutFlow;
+                                        }
+                                    }
+                                    if (p.LowOutput != null)
+                                    {
+                                        foreach (Connection x in listConnections)
+                                        {
+                                            if (x == p.LowOutput)
+                                                x.flow = p.lowOutFlow;
+                                        }
+                                    }
+                                    this.listConnections.Add(con);
+                                }
+                            }
+                            
+                            break;
+                        }
+                    }
+                }
+
+                else if (con.endComponent is Adjustable_Spliter)
+                {
+
+                    for (int i = 0; i < listComponents.Count; i++)
+                    {
+                        if (listComponents.ElementAt(i) == con.endComponent)
+                        {
+                            Adjustable_Spliter p = listComponents.ElementAt(i) as Adjustable_Spliter;
+                            Rectangle r1 = new Rectangle(con.curvePoints[con.curvePoints.Count() - 1], new Size(2, 2));
+                            if (r1.IntersectsWith(p.input))
+                            {
+                                p.setInput(ref con);
+                                if (con != null)
+                                {
+                                    listComponents[i] = p;
+                                    con.endComponent = p;
+                                    if (p.UpOutput != null)
+                                    {
+                                        foreach (Connection x in listConnections)
+                                        {
+                                            if (x == p.UpOutput)
+                                                x.flow = p.upOutFlow;
+                                        }
+                                    }
+                                    if (p.LowOutput != null)
+                                    {
+                                        foreach (Connection x in listConnections)
+                                        {
+                                            if (x == p.LowOutput)
+                                                x.flow = p.lowOutFlow;
+                                        }
+                                    }
+                                    this.listConnections.Add(con);
+                                }
+                            }
+
+                            break;
+                        }
+                    }
+                }
+
             }
             
         }
@@ -287,6 +389,88 @@ namespace OOD2_project
         /// <param name="comp"></param>
         public void RemoveComponent(Component comp)
         {
+            List<Connection> toRemove = new List<Connection>();
+            foreach (Connection x in listConnections)
+            {
+                if (x.startComponent == comp)
+                {
+                    int counter = 0;
+                    foreach (Component y in listComponents)
+                    {
+                        if (y == x.endComponent)
+                        {
+                            if (y is Pump)
+                            {
+                                Pump s = y as Pump;
+                                s.Clear();
+                                listComponents[counter] = s;
+                            }
+                            else if (y is Spliter)
+                            {
+                                Spliter s = y as Spliter;
+                                s.Clear(x);
+                                listComponents[counter] = s;
+                            }
+                            else if (y is Adjustable_Spliter)
+                            {
+                                Adjustable_Spliter s = y as Adjustable_Spliter;
+                                s.Clear(x);
+                                listComponents[counter] = s;
+                            }
+                            else if (y is Merger)
+                            {
+                                Merger s = y as Merger;
+                                s.Clear(x);
+                                listComponents[counter] = s;
+                            }
+
+                        }
+                        counter++;
+                    }
+                    toRemove.Add(x);
+                }
+                if (x.endComponent == comp)
+                {
+                    int counter = 0;
+                    foreach (Component y in listComponents)
+                    {
+                        if (y == x.startComponent)
+                        {
+                            if (y is Sink)
+                            {
+                                Sink s = y as Sink;
+                                s.Clear();
+                                listComponents[counter] = s;
+                            }
+                            else if (y is Spliter)
+                            {
+                                Spliter s = y as Spliter;
+                                s.Clear(x);
+                                listComponents[counter] = s;
+                            }
+                            else if (y is Adjustable_Spliter)
+                            {
+                                Adjustable_Spliter s = y as Adjustable_Spliter;
+                                s.Clear(x);
+                                listComponents[counter] = s;
+                            }
+                            else if (y is Merger)
+                            {
+                                Merger s = y as Merger;
+                                s.Clear(x);
+                                listComponents[counter] = s;
+                            }
+
+                        }
+                    }
+                    toRemove.Add(x);
+                }
+            }
+
+            foreach (Connection c1 in toRemove)
+            {
+                listConnections.Remove(c1);
+            }
                    // this.RemoveConnection();
                     this.listComponents.Remove(comp);
         }

@@ -15,8 +15,8 @@ namespace OOD2_project
         public int lowOutFlow;
         public int inFlow;
         private Connection Input;
-        private Connection UpOutput;
-        private Connection LowOutput;
+        public Connection UpOutput;
+        public Connection LowOutput;
         private bool counterIn = false;
         private bool counterUpOut = false;
         private bool counterLowOut = false;
@@ -44,8 +44,30 @@ namespace OOD2_project
         public void Split()
         {
            // input = base.currentFlow;
-            this.upOutFlow = currentFlow / 2;
-            this.lowOutFlow = currentFlow / 2;
+            this.upOutFlow = inFlow / 2;
+            this.lowOutFlow = inFlow / 2;
+        }
+
+        public void Clear(Connection con)
+        {
+            if (con == this.Input)
+            {
+                counterIn = false;
+                inFlow = 0;
+                upOutFlow = 0;
+                lowOutFlow = 0;
+                Input = null;
+            }
+            else if (con == this.LowOutput)
+            {
+                counterLowOut = false;
+                LowOutput = null;
+            }
+            else if (con == this.UpOutput)
+            {
+                counterUpOut = false;
+                LowOutput = null;
+            }
         }
 
         public void setInput( ref Connection conn)
@@ -59,6 +81,7 @@ namespace OOD2_project
             {
                 this.Input = conn;
                 this.inFlow = conn.flow;
+                Split();
                 counterIn = true;
             }
             
@@ -69,6 +92,7 @@ namespace OOD2_project
             if (!counterUpOut)
             {
                 this.UpOutput = conn;
+                Split();
                 conn.flow = upOutFlow;
                 counterUpOut = true;
             }
@@ -84,6 +108,7 @@ namespace OOD2_project
             if (!counterLowOut)
             {
                 this.LowOutput = con;
+                Split();
                 con.flow = lowOutFlow;
                 counterLowOut = true;
             }

@@ -11,17 +11,20 @@ namespace OOD2_project
     [Serializable]
     public class Adjustable_Spliter : Component
     {
-        private int lowPercentage;
-        private int upPercentage;
+        private int percentage;
         private int inFlow;
         public int upOutFlow;
         public int lowOutFlow;
         private Connection Input;
-        private Connection UpOutput;
-        private Connection LowOutput;
+        public Connection UpOutput;
+        public Connection LowOutput;
         private bool counterIn = false;
         private bool counterUpOut = false;
         private bool counterLowOut = false;
+
+        public Rectangle upperRight;
+        public Rectangle lowerRight;
+        public Rectangle input;
 
         public Adjustable_Spliter(Image image, int size, Point coordinates)
             : base(image, size, coordinates)
@@ -29,14 +32,45 @@ namespace OOD2_project
             inFlow = 0;
             upOutFlow = 0;
             lowOutFlow = 0;
+
+            upperRight = new Rectangle((base.rect.Right - (base.rect.Width / 2) + 10), base.rect.Bottom - base.rect.Height, 30, 27);
+            lowerRight = new Rectangle((base.rect.Right - (base.rect.Width / 2) + 12), base.rect.Top + (base.rect.Height / 2), base.rect.Width / 2, (base.rect.Height / 2) + 1);
+            input = new Rectangle(base.rect.Left, base.rect.Top, base.rect.Width / 2, base.rect.Height);
             //this.currentFlow = CurrentFlow;
         }
 
-        public void Split(int value)
+        public void setPercentage(int value)
+        {
+            percentage = value;
+        }
+
+        public void Split()
         {
            // input = base.currentFlow;
-            this.upOutFlow = inFlow * ((value / 100) * inFlow);
-            this.lowOutFlow = ((value / 100) * inFlow);
+            this.upOutFlow = inFlow * percentage / 100;
+            this.lowOutFlow = inFlow - upOutFlow; 
+        }
+
+        public void Clear(Connection con)
+        {
+            if (con == this.Input)
+            {
+                counterIn = false;
+                inFlow = 0;
+                upOutFlow = 0;
+                lowOutFlow = 0;
+                Input = null;
+            }
+            else if (con == this.LowOutput)
+            {
+                counterLowOut = false;
+                LowOutput = null;
+            }
+            else if (con == this.UpOutput)
+            {
+                counterUpOut = false;
+                LowOutput = null;
+            }
         }
 
         public void setInput(ref Connection conn)
@@ -47,15 +81,17 @@ namespace OOD2_project
             {
                 this.Input = conn;
                 this.inFlow = conn.flow;
+                Split();
                 counterIn = true;
             }
         }
 
         public void SetUpOutput(ref Connection conn)
         {
-            if (counterUpOut)
+            if (!counterUpOut)
             {
                 this.UpOutput = conn;
+                Split();
                 conn.flow = upOutFlow;
                 counterUpOut = true;
             }
@@ -67,9 +103,10 @@ namespace OOD2_project
 
         public void SetLowOutput(ref Connection con)
         {
-            if (counterLowOut)
+            if (!counterLowOut)
             {
                 this.LowOutput = con;
+                Split();
                 con.flow = lowOutFlow;
                 counterLowOut = true;
             }

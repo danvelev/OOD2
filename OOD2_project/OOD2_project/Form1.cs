@@ -356,7 +356,7 @@ namespace OOD2_project
             trackBar1.Visible = false;
             btSet.Visible = false;
             lbPrc.Visible = false;
-            adjSpliter.Split(trackBar1.Value);
+            adjSpliter.setPercentage(trackBar1.Value);
              
         }
 
