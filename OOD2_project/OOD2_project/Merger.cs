@@ -20,11 +20,18 @@ namespace OOD2_project
         private bool counterUpIn = false;
         private bool counterOut = false;
 
+        public Rectangle upperLeft;
+        public Rectangle lowerLeft;
+        public Rectangle output;
+
         public Merger(Image image, int size, Point coordinates)
             : base(image, size, coordinates)
         {
             //this.upInput = UpInput;
             //this.lowInput = LowInput;
+            upperLeft = new Rectangle(0, 0, 30, 20);
+            lowerLeft = new Rectangle(0, 21, 30, 20);
+            output = new Rectangle(33, 0, 35, 40);
         }
 
         public void Clear(Connection con)

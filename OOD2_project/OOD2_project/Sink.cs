@@ -60,6 +60,7 @@ namespace OOD2_project
             {
                 input = con;
                 this.inFlow = con.flow;
+                isEmpty = false;
             }
             else
                 MessageBox.Show("You cannot have more than one Input in the Sink!");
