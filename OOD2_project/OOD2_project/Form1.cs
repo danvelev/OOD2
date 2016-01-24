@@ -34,6 +34,8 @@ namespace OOD2_project
             InitializeComponent();
             pointsList = new List<Point>();
             this.network = new Network(workPanel.Height, workPanel.Width);
+            this.tbCurrentFlow.Text = "0";
+            this.tbMaxFlow.Text = "0";
         }
 
         private void workPanel_MouseDown(object sender, MouseEventArgs e)
@@ -54,6 +56,10 @@ namespace OOD2_project
                         if (tbCurrentFlow.Text == "" && tbMaxFlow.Text == "")
                         {
                             MessageBox.Show("Please enter the current and max flow");
+                        }
+                        else if (Convert.ToInt32(tbCurrentFlow.Text) < 0 && Convert.ToInt32(tbMaxFlow.Text) < 0)
+                        {
+                            MessageBox.Show("Current and Max flow must be positive integers");
                         }
                         else
                         {
